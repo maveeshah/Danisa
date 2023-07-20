@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include danisa *.css
+recursive-include danisa *.csv
+recursive-include danisa *.html
+recursive-include danisa *.ico
+recursive-include danisa *.js
+recursive-include danisa *.json
+recursive-include danisa *.md
+recursive-include danisa *.png
+recursive-include danisa *.py
+recursive-include danisa *.svg
+recursive-include danisa *.txt
+recursive-exclude danisa *.pyc
