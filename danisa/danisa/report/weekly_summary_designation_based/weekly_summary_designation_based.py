@@ -38,7 +38,6 @@ def get_conds(filters):
 def get_columns(date_list):
 	columns = [ _("Employee Name") + "::190", _("ID. No.") + "::150",_("Phone No") + "::150"]
 	for day in date_list:
-		#columns.append(cstr(day+1) +"::20")
 		columns.append(day.strftime("%a") + "::70")
 	columns += [_("Total Shifts") +":Int:80",_("Amount") + ":Currency:95"]
 	return columns
