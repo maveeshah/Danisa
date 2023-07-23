@@ -23,10 +23,10 @@ frappe.query_reports["Weekly Summary Designation Based"] = {
       reqd: 1,
     },
     {
-		fieldname: "designation",
-		label: __("Designation"),
-		fieldtype: "Link",
-		options: "Designation",
-	  },
+      fieldname: "designation",
+      label: __("Designation"),
+      fieldtype: "Link",
+      options: "Designation",
+    },
   ],
 };

@@ -12,6 +12,7 @@ def execute(filters=None):
 	conditions = get_conditions(filters)
 	columns = get_columns()
 	data = get_results(filters,conditions)
+
 	return columns, data
 
 
@@ -19,7 +20,6 @@ def get_conditions(filters):
 	conds = ""
 	conds += " AND company = %(company)s " if filters.get("company") else ""
 	conds += " AND attendance_date = %(attendance_date)s " if filters.get("attendance_date") else ""
-	conds += " AND attendance_date between %(from_date)s and %(to_date)s " if filters.get("from_date") and filters.get("to_date") else ""
 	return conds
 
 def get_columns():
@@ -27,6 +27,14 @@ def get_columns():
 	
 
 def get_results(filters,conditions):
-	return frappe.db.sql("""SELECT employee_name, id_number, ifnull(shift,' '), ifnull(place_of_work, ' '), ifnull(in_time, 'Not Marked'), ifnull(out_time, 'Not Marked')
-							FROM `tabAttendance`
-		      				WHERE docstatus = 1 %s """% conditions, filters, as_dict=1)
+	query = """
+		SELECT employee_name, id_number, 
+			IFNULL(shift, ' '), 
+			IFNULL(place_of_work, ' '), 
+			IFNULL(in_time, 'Not Marked'), 
+			IFNULL(out_time, 'Not Marked')
+		FROM `tabAttendance`
+		WHERE docstatus = 1 {0}
+	""".format(conditions)
+
+	return frappe.db.sql(query, filters)
