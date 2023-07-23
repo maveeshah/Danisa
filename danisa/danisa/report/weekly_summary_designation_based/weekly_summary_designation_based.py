@@ -2,8 +2,8 @@
 # For license information, please see license.txt
 
 import frappe
-from frappe.utils import getdate,cstr
-from datetime import timedelta,datetime
+from frappe.utils import getdate
+from datetime import timedelta
 from frappe import _
 
 
