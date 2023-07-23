@@ -82,7 +82,7 @@ def get_attendance_list(conditions, filters):
 def get_employee_details(filters):
 	emp_conds = " "
 	emp_map = frappe._dict()
-	for d in frappe.db.sql("""select name, employee_name, branch, cell_number,company,
+	for d in frappe.db.sql("""select name, employee_name, branch, cell_number,company,id_number,
 		designation from tabEmployee where status = 'Active' %s """  % emp_conds, filters, as_dict=1):
 		emp_map.setdefault(d.name, d)
 
