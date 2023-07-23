@@ -15,12 +15,14 @@ frappe.query_reports["Weekly Summary Designation Based"] = {
       label: __("From Date"),
       fieldtype: "Date",
       reqd: 1,
+      default: frappe.datetime.add_days(frappe.datetime.nowdate(), -7),
     },
     {
       fieldname: "to_date",
       label: __("To Date"),
       fieldtype: "Date",
       reqd: 1,
+      default: frappe.datetime.nowdate(),
     },
     {
       fieldname: "designation",

@@ -41,19 +41,21 @@ frappe.query_reports["Daily Attendance Sheet"] = {
       fieldname: "attendance_date",
       label: __("Attendance Date"),
       fieldtype: "Date",
-	  reqd: 1,
-    //   hidden: 1,
-    //   on_change: function (query_report) {
-    //     const attendance_date =
-    //       frappe.query_report.get_filter("attendance_date");
-    //     const from_date = frappe.query_report.get_filter("from_date");
-    //     const to_date = frappe.query_report.get_filter("to_date");
+      reqd: 1,
+	  default: frappe.datetime.nowdate()
 
-    //     if (attendance_date) {
-    //       frappe.query_report.set_filter_value("from_date", "");
-    //       frappe.query_report.set_filter_value("to_date", "");
-    //     }
-    //   },
+      //   hidden: 1,
+      //   on_change: function (query_report) {
+      //     const attendance_date =
+      //       frappe.query_report.get_filter("attendance_date");
+      //     const from_date = frappe.query_report.get_filter("from_date");
+      //     const to_date = frappe.query_report.get_filter("to_date");
+
+      //     if (attendance_date) {
+      //       frappe.query_report.set_filter_value("from_date", "");
+      //       frappe.query_report.set_filter_value("to_date", "");
+      //     }
+      //   },
     },
     // {
     //   fieldname: "from_date",
