@@ -20,6 +20,7 @@ def get_conditions(filters):
 	conds += " AND company = %(company)s " if filters.get("company") else ""
 	conds += " AND attendance_date = %(attendance_date)s " if filters.get("attendance_date") else ""
 	conds += " AND attendance_date between %(from_date)s and %(to_date)s " if filters.get("from_date") and filters.get("to_date") else ""
+	return conds
 
 def get_columns():
 	return  [ _("Employee Name") + "::190", _("ID. No.") + "::150",_("Shift") + "::150",_("Place of Work") + "::150",_("Time In") + "::150",_("Time Out") + "::150"]
