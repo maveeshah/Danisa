@@ -52,7 +52,7 @@ def get_results(filters,date_list):
 				count =	frappe.db.count("Attendance",filters={"attendance_date":date,"designation":designation.name,"company":company},debug=False)
 				if count:
 					row.append(count)
-					total += count
+					total_shifts += count
 			else:
 				row.append(0)
 		row.append(total_shifts)

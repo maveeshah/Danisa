@@ -3,31 +3,33 @@
 /* eslint-disable */
 
 frappe.query_reports["Weekly Designation Summary"] = {
-	filters: [
-		{
-		  fieldname: "company",
-		  label: __("Company"),
-		  fieldtype: "Link",
-		  options: "Company",
-		  reqd: 1,
-		},
-		{
-		  fieldname: "from_date",
-		  label: __("From Date"),
-		  fieldtype: "Date",
-		  reqd: 1,
-		},
-		{
-		  fieldname: "to_date",
-		  label: __("To Date"),
-		  fieldtype: "Date",
-		  reqd: 1,
-		},
-		{
-		  fieldname: "shift",
-		  label: __("Shift"),
-		  fieldtype: "Link",
-		  options: "Shift Type",
-		},
-	  ],
+  filters: [
+    {
+      fieldname: "company",
+      label: __("Company"),
+      fieldtype: "Link",
+      options: "Company",
+      reqd: 1,
+    },
+    {
+      fieldname: "from_date",
+      label: __("From Date"),
+      fieldtype: "Date",
+      reqd: 1,
+      default: frappe.datetime.add_days(frappe.datetime.nowdate(), -7),
+    },
+    {
+      fieldname: "to_date",
+      label: __("To Date"),
+      fieldtype: "Date",
+      reqd: 1,
+      default: frappe.datetime.nowdate(),
+    },
+    {
+      fieldname: "shift",
+      label: __("Shift"),
+      fieldtype: "Link",
+      options: "Shift Type",
+    },
+  ],
 };
