@@ -28,11 +28,8 @@ def get_columns():
 
 def get_results(filters,conditions):
 	query = """
-		SELECT employee_name, id_number, 
-			IFNULL(shift, ' '), 
-			IFNULL(place_of_work, ' '), 
-			IFNULL(in_time, 'Not Marked'), 
-			IFNULL(out_time, 'Not Marked')
+		SELECT employee_name, id_number, shift, place_of_work,
+			in_time, out_time
 		FROM `tabAttendance`
 		WHERE docstatus = 1 {0}
 	""".format(conditions)
