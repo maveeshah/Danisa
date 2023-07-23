@@ -26,6 +26,6 @@ def get_columns():
 	
 
 def get_results(filters,conditions):
-	return frappe.db.sql("""SELECT employee_name, id_number, ifnull(shift,' '), ifnull(place_of_work, ' ', ifnull(in_time, 'Not Marked'), ifnull(out_time, 'Not Marked'))
+	return frappe.db.sql("""SELECT employee_name, id_number, ifnull(shift,' '), ifnull(place_of_work, ' '), ifnull(in_time, 'Not Marked'), ifnull(out_time, 'Not Marked'))
 							FROM `tabAttendance`
 		      				WHERE docstatus = 1 %s """% conditions, filters, as_dict=1)
