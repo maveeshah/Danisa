@@ -29,7 +29,7 @@ def execute(filters=None):
 def get_conditions(filters):
 	conds = ""
 	conds += " AND company = %(company)s " if filters.get("company") else ""
-	conds += " AND designation = %(designation)s " if filters.get("designation") else ""
+	conds += " AND shift = %(shift)s " if filters.get("shift") else ""
 	conds += " AND attendance_date between %(from_date)s AND %(to_date)s " if filters.get("from_date") and filters.get("to_date") else ""
 	return conds
 
@@ -48,13 +48,21 @@ def get_results(filters,date_list):
 		total_shifts = 0
 		row = [designation.name]
 		for date in date_list:
-			if frappe.db.exists("Attendance",{"attendance_date":date,"designation":designation.name,"company":company}):
-				count =	frappe.db.count("Attendance",filters={"attendance_date":date,"designation":designation.name,"company":company},debug=False)
-				if count:
-					row.append(count)
-					total_shifts += count
+			if filters.get("shift"):
+				shift = filters.get("shift")
+				if frappe.db.exists("Attendance",{"attendance_date":date,"designation":designation.name,"company":company,"shift":shift}):
+					count =	frappe.db.count("Attendance",filters={"attendance_date":date,"designation":designation.name,"company":company,"shift":shift},debug=False)
+					if count:
+						row.append(count)
+						total_shifts += count
 			else:
-				row.append(0)
+				if frappe.db.exists("Attendance",{"attendance_date":date,"designation":designation.name,"company":company}):
+					count =	frappe.db.count("Attendance",filters={"attendance_date":date,"designation":designation.name,"company":company},debug=False)
+					if count:
+						row.append(count)
+						total_shifts += count
+				else:
+					row.append(0)
 		row.append(total_shifts)
 		amount = frappe.db.get_value("Designation",designation.name, "amount_per_shift")
 		row.append(amount if amount else 0)
