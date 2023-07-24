@@ -41,7 +41,7 @@ def get_columns(date_list):
 
 def get_results(filters,date_list,conds):
 	company = filters.get("company")
-	designations = frappe.db.get_list("Designation",{"company":company})
+	designations = frappe.db.get_list("Designation")
 	data = []
 	for designation in designations:
 		total_shifts = 0
