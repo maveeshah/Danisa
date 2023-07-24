@@ -45,20 +45,21 @@ def get_results(filters,date_list,conds):
 	data = []
 	for designation in designations:
 		total_shifts = 0
-		row = [designation.name]
-
-		for date in date_list:
-			query = f"""select count(*) as total from `tabAttendance` WHERE docstatus = 1 {conds} and attendance_date = '{date}' and designation = '{designation.name}'"""
-			count = frappe.db.sql(query,filters,as_dict=1)[0]
-			row.append(count.total)
-			total_shifts += count.total
-		row.append(total_shifts)
-		amount = frappe.db.get_value("Designation",designation.name, "amount_per_shift")
-		row.append(amount if amount else 0)
-		if amount:
-			total_amount = total_shifts * float(amount)
-		else:
-			total_amount = total_shifts * 0
-		row.append(total_amount)
-		data.append(row)
+		# if frappe.db.exists("Attendance",{"designation":designation.name,"docstatus":1,"shift":filters.get("shift")}):
+		if frappe.db.sql(f"select name from `tabAttendance` where docstatus = 1 {conds}  and designation = '{designation.name}'",filters):
+			row = [designation.name]
+			for date in date_list:
+				query = f"""select count(*) as total from `tabAttendance` WHERE docstatus = 1 {conds} and attendance_date = '{date}' and designation = '{designation.name}'"""
+				count = frappe.db.sql(query,filters,as_dict=1)[0]
+				row.append(count.total)
+				total_shifts += count.total
+			row.append(total_shifts)
+			amount = frappe.db.get_value("Designation",designation.name, "amount_per_shift")
+			row.append(amount if amount else 0)
+			if amount:
+				total_amount = total_shifts * float(amount)
+			else:
+				total_amount = total_shifts * 0
+			row.append(total_amount)
+			data.append(row)
 	return data

@@ -41,8 +41,8 @@ def get_conds(filters):
 	return conds
 
 def get_results(filters,date_list,conds):
-	query = f"""select employee_name,id_number, attendance_date, shift, place_of_work, DATE_FORMAT(in_time, '%H:%i') AS in_time,
-                DATE_FORMAT(out_time, '%H:%i') AS out_time from tabAttendance 
+	query = f"""select employee_name,id_number, attendance_date, shift, place_of_work, SUBSTRING(time(in_time), 1, 5) AS in_time,
+                SUBSTRING(time(out_time), 1, 5) AS out_time from tabAttendance 
 				where docstatus = 1 {conds} order by attendance_date, employee"""
 	data = frappe.db.sql(query,filters)
 	return data
