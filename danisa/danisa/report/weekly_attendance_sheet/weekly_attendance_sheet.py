@@ -28,10 +28,9 @@ def execute(filters=None):
 
 
 def get_columns(date_list):
-	columns = [ _("Employee Name") + "::190", _("ID. No.") + "::150"]
-	for day in date_list:
-		columns += [_(f"{day.strftime('%a')} Shift") + ":Link/Shift Type:115",_(f"{day.strftime('%a')} Place of Work") + "::150",
-	      _(f"{day.strftime('%a')} Time In") + "::150",_(f"{day.strftime('%a')} Time Out") + "::150"]
+	columns = [ _("Employee Name") + "::190", _("ID. No.") + "::150",_(" Attendance Date") + ":Date:115"
+	     _(" Shift") + ":Link/Shift Type:115",_(" Place of Work") + "::150",
+		_(" Time In") + "::150",_(" Time Out") + "::150"]
 	return columns
 
 def get_conds(filters):
@@ -42,48 +41,8 @@ def get_conds(filters):
 	return conds
 
 def get_results(filters,date_list,conds):
-	att_map = get_attendance_list(conds, filters)
-	emp_map = get_employee_details(filters)
-	data = []
-	for emp in sorted(att_map):
-		emp_det = emp_map.get(emp)
-		if not emp_det:
-			continue
-		row = [emp_det.employee_name, emp_det.id_number]
-		for date in date_list:
-			status = att_map.get(emp).get(date, ["None"])
-			if  status[0] == "Present":
-				row.append(status[4])
-				row.append(status[5])
-				row.append(status[2])
-				row.append(status[3])
-			else:
-				row.append('')
-				row.append('')
-				row.append('')
-				row.append('')
-		data.append(row)
+	query = f"""select employee_name,id_number, attendance_date, shift, place_of_work, ifnull(in_time,'Not Marked') as in_time,
+				ifnull(out_time, 'Not Marked') as out_time from tabAttendance 
+				where docstatus = 1 {conds} order by attendance_date, employee"""
+	data = frappe.db.sql(query,filters)
 	return data
-
-
-
-def get_attendance_list(conditions, filters):
-	attendance_list = frappe.db.sql("""select employee, attendance_date as day_of_month, shift, place_of_work,
-		status,ifnull(in_time,'Not Marked') as in_time,ifnull(out_time, 'Not Marked') as out_time, designation from tabAttendance 
-		where docstatus = 1 %s order by employee, attendance_date""" % conditions, filters, as_dict=1)
-
-	att_map = {}
-	for d in attendance_list:
-		att_map.setdefault(d.employee, frappe._dict()).setdefault(d.day_of_month, "")
-		att_map[d.employee][d.day_of_month] = [d.status,d.designation,d.in_time,d.out_time,d.shift,d.place_of_work]
-
-	return att_map
-
-def get_employee_details(filters):
-	emp_conds = " "
-	emp_map = frappe._dict()
-	for d in frappe.db.sql("""select name, employee_name, branch, cell_number,company,id_number,
-		designation from tabEmployee where status = 'Active' %s """  % emp_conds, filters, as_dict=1):
-		emp_map.setdefault(d.name, d)
-
-	return emp_map
