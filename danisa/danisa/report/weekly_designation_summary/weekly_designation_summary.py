@@ -51,6 +51,7 @@ def get_results(filters,date_list):
 		for date in date_list:
 			# if filters.get("shift"):
 			# 	shift = filters.get("shift")
+			# changes here
 			if frappe.db.exists("Attendance",{"attendance_date":date,"designation":designation.name,"company":company,"shift":shift}):
 				count =	frappe.db.count("Attendance",filters={"attendance_date":date,"designation":designation.name,"company":company,"shift":shift},debug=False)
 				if count:
