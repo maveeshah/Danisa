@@ -28,7 +28,7 @@ def execute(filters=None):
 
 
 def get_columns(date_list):
-	columns = [ _("Employee Name") + "::190", _("ID. No.") + "::150",_(" Attendance Date") + ":Date:115"
+	columns = [ _("Employee Name") + "::190", _("ID. No.") + "::150",_(" Attendance Date") + ":Date:115",
 	     _(" Shift") + ":Link/Shift Type:115",_(" Place of Work") + "::150",
 		_(" Time In") + "::150",_(" Time Out") + "::150"]
 	return columns
