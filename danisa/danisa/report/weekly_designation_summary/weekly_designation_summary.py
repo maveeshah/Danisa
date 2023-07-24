@@ -21,8 +21,7 @@ def execute(filters=None):
 	columns, data = [], []
 	conditions = get_conditions(filters)
 	columns = get_columns(date_list)
-	data = get_results(filters,date_list)
-
+	data = get_results(filters,date_list,conditions)
 	return columns, data
 
 
@@ -40,37 +39,26 @@ def get_columns(date_list):
 	columns += [_("Total Shifts") +":Int:80",_("Rate") + ":Currency:95",_("Amount") + ":Currency:95"]
 	return columns
 
-def get_results(filters,date_list):
+def get_results(filters,date_list,conds):
 	company = filters.get("company")
-	shift = filters.get("shift")
 	designations = frappe.db.get_list("Designation",{"company":company})
 	data = []
 	for designation in designations:
 		total_shifts = 0
 		row = [designation.name]
+
 		for date in date_list:
-			# if filters.get("shift"):
-			# 	shift = filters.get("shift")
-			# changes here
-			if frappe.db.exists("Attendance",{"attendance_date":date,"designation":designation.name,"company":company,"shift":shift}):
-				count =	frappe.db.count("Attendance",filters={"attendance_date":date,"designation":designation.name,"company":company,"shift":shift},debug=False)
-				if count:
-					row.append(count)
-					total_shifts += count
-				else:
-					row.append(0)
-			# else:
-			# if frappe.db.exists("Attendance",{"attendance_date":date,"designation":designation.name,"company":company}):
-			# 	count =	frappe.db.count("Attendance",filters={"attendance_date":date,"designation":designation.name,"company":company},debug=False)
-			# 	if count:
-			# 		row.append(count)
-			# 		total_shifts += count
-			# else:
-			# 	row.append(0)
+			query = f"""select count(*) as total from `tabAttendance` WHERE docstatus = 1 {conds} and attendance_date = '{date}' and designation = '{designation.name}'"""
+			count = frappe.db.sql(query,filters,as_dict=1)[0]
+			row.append(count.total)
+			total_shifts += count.total
 		row.append(total_shifts)
 		amount = frappe.db.get_value("Designation",designation.name, "amount_per_shift")
 		row.append(amount if amount else 0)
-		total_amount = total_shifts * amount
+		if amount:
+			total_amount = total_shifts * float(amount)
+		else:
+			total_amount = total_shifts * 0
 		row.append(total_amount)
 		data.append(row)
 	return data
