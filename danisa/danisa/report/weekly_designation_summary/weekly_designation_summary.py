@@ -42,29 +42,30 @@ def get_columns(date_list):
 
 def get_results(filters,date_list):
 	company = filters.get("company")
+	shift = filters.get("shift")
 	designations = frappe.db.get_list("Designation",{"company":company})
 	data = []
 	for designation in designations:
 		total_shifts = 0
 		row = [designation.name]
 		for date in date_list:
-			if filters.get("shift"):
-				shift = filters.get("shift")
-				if frappe.db.exists("Attendance",{"attendance_date":date,"designation":designation.name,"company":company,"shift":shift}):
-					count =	frappe.db.count("Attendance",filters={"attendance_date":date,"designation":designation.name,"company":company,"shift":shift},debug=False)
-					if count:
-						row.append(count)
-						total_shifts += count
-					else:
-						row.append(0)
-			else:
-				if frappe.db.exists("Attendance",{"attendance_date":date,"designation":designation.name,"company":company}):
-					count =	frappe.db.count("Attendance",filters={"attendance_date":date,"designation":designation.name,"company":company},debug=False)
-					if count:
-						row.append(count)
-						total_shifts += count
+			# if filters.get("shift"):
+			# 	shift = filters.get("shift")
+			if frappe.db.exists("Attendance",{"attendance_date":date,"designation":designation.name,"company":company,"shift":shift}):
+				count =	frappe.db.count("Attendance",filters={"attendance_date":date,"designation":designation.name,"company":company,"shift":shift},debug=False)
+				if count:
+					row.append(count)
+					total_shifts += count
 				else:
 					row.append(0)
+			# else:
+			# if frappe.db.exists("Attendance",{"attendance_date":date,"designation":designation.name,"company":company}):
+			# 	count =	frappe.db.count("Attendance",filters={"attendance_date":date,"designation":designation.name,"company":company},debug=False)
+			# 	if count:
+			# 		row.append(count)
+			# 		total_shifts += count
+			# else:
+			# 	row.append(0)
 		row.append(total_shifts)
 		amount = frappe.db.get_value("Designation",designation.name, "amount_per_shift")
 		row.append(amount if amount else 0)
