@@ -19,6 +19,12 @@ frappe.query_reports["Cargo Handling Report"] = {
       reqd: 1,
     },
     {
+      fieldname: "commodity_type",
+      label: __("Commodity"),
+      fieldtype: "Link",
+      options: "Commodity Type",
+    },
+    {
       fieldname: "shift",
       label: __("Shift"),
       fieldtype: "Link",

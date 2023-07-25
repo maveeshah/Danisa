@@ -22,7 +22,7 @@ def get_conditions(filters):
 	conds += " AND shift = %(shift)s " if filters.get("shift") else ""
 	conds += " AND operation = %(operation)s " if filters.get("operation") else ""
 	conds += " AND godown = %(godown)s " if filters.get("godown") else ""
-	
+	conds += "AND commodity_type = %(commodity_type)s " if filters.get("commodity_type") else ""
 	return conds
 
 def get_data(conditions,filters):
