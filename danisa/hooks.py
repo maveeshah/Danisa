@@ -199,3 +199,14 @@ app_license = "MIT"
 # auth_hooks = [
 #	"danisa.auth.validate"
 # ]
+fixtures = [
+{	"dt":"Custom Field",
+"filters": [
+[
+"module" , "in", [
+"Danisa",
+]
+],
+]
+},
+]
