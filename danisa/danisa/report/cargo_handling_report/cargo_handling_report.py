@@ -34,6 +34,7 @@ def get_data(conditions,filters):
 					FROM `tabCargo Handling`
 					WHERE docstatus = 1 {conditions}
 					)
+				ORDER BY parent
 				"""
 	data = frappe.db.sql(query,filters)
 	return data
