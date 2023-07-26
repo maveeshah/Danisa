@@ -34,7 +34,7 @@ def get_conditions(filters):
 	return conds
 
 def get_columns(date_list):
-	columns = [ _("Employee Name") + "::190",_("Employee Name") + "::190",_("Employee Name") + "::190"]
+	columns = [ _("Employee Name") + "::190",_("ID No.") + "::190",_("Phone No") + "::190"]
 	for day in date_list:
 		columns.append(day.strftime("%a") + "::70")
 	columns += [_("Total Amount") + ":Currency:95"]
