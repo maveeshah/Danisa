@@ -45,13 +45,11 @@ def get_results(filters,date_list,conds):
 	data = []
 	for designation in designations:
 		total_shifts = 0
-		# if frappe.db.exists("Attendance",{"designation":designation.name,"docstatus":1,"shift":filters.get("shift")}):
 		if frappe.db.sql(f"select name from `tabAttendance` where docstatus = 1 {conds}  and designation = '{designation.name}'",filters):
 			row = [designation.name]
 			for date in date_list:
 				query = f"""select count(*) as total from `tabAttendance` WHERE docstatus = 1 {conds} and attendance_date = '{date}' and designation = '{designation.name}'"""
 				count = frappe.db.sql(query,filters,as_dict=1)[0]
-				frappe.msgprint(frappe.as_json(count))
 				row.append(count.total)
 				total_shifts += count.total
 			row.append(total_shifts)
