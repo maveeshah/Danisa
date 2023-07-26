@@ -53,8 +53,8 @@ def get_results(filters,date_list,conds):
 		for date in date_list:
 			status = att_map.get(emp).get(date, ["None"])
 			if  status[0] == "Present":
-				row.append(status[2])
-				amount = amount  + status[2]
+				row.append(status[1])
+				amount = amount  + status[1]
 			else:
 				row.append(0)
 		row.append(amount)	
