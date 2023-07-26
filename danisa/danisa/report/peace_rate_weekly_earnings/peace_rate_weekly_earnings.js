@@ -31,6 +31,7 @@ frappe.query_reports["Peace Rate Weekly Earnings"] = {
       fieldtype: "Link",
       options: "Employee Group",
       reqd: 1,
+      default: "Peace Rate",
     },
     {
       fieldname: "designation",
@@ -40,8 +41,11 @@ frappe.query_reports["Peace Rate Weekly Earnings"] = {
       reqd: 1,
       get_query: () => {
         var company = frappe.query_report.get_filter_value("company");
+        var employee_group =
+          frappe.query_report.get_filter_value("employee_group");
         return {
           filters: {
+            employee_group: employee_group,
             company: company,
           },
         };
