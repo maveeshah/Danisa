@@ -16,7 +16,7 @@ frappe.query_reports["Weekly Designation Summary"] = {
       label: __("From Date"),
       fieldtype: "Date",
       reqd: 1,
-      default: frappe.datetime.add_days(frappe.datetime.nowdate(), -7),
+      default: frappe.datetime.add_days(frappe.datetime.nowdate(), -6),
     },
     {
       fieldname: "to_date",
@@ -30,6 +30,14 @@ frappe.query_reports["Weekly Designation Summary"] = {
       label: __("Shift"),
       fieldtype: "Link",
       options: "Shift Type",
+			get_query: () => {
+				var company = frappe.query_report.get_filter_value('company');
+				return {
+					filters: {
+						'company': company
+					}
+				}
+			}
     },
   ],
 };
