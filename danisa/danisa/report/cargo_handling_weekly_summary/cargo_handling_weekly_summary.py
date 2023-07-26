@@ -84,5 +84,5 @@ def get_columns(date_list):
 	columns =  [_("Commodity Type") + ":Link/Commodity Type:150",]
 	for day in date_list:
 		columns.append(day.strftime("%a") + "::70")
-	columns += [_("Total Shifts") +":Int:80",_("Rate") + ":Currency:95",_("Amount") + ":Currency:95"]
+	columns += [_("Total Bags/Bales") +":Int:80",_("Rate") + ":Currency:95",_("Amount") + ":Currency:95"]
 	return columns	
