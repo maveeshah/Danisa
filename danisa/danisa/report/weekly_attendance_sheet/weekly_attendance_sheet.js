@@ -16,7 +16,7 @@ frappe.query_reports["Weekly Attendance Sheet"] = {
       label: __("From Date"),
       fieldtype: "Date",
       reqd: 1,
-      default: frappe.datetime.add_days(frappe.datetime.nowdate(), -7),
+      default: frappe.datetime.add_days(frappe.datetime.nowdate(), -6),
     },
     {
       fieldname: "to_date",
