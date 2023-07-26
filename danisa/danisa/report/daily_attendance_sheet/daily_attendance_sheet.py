@@ -30,7 +30,7 @@ def get_columns():
 def get_results(filters,conditions):
 	query = """
 		SELECT employee_name, id_number, shift, place_of_work,
-			in_time, out_time
+		SUBSTRING(time(in_time), 1, 5) AS in_time, SUBSTRING(time(out_time), 1, 5) AS out_time
 		FROM `tabAttendance`
 		WHERE docstatus = 1 {0}
 	""".format(conditions)

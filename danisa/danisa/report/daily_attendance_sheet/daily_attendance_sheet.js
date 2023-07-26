@@ -23,6 +23,14 @@ frappe.query_reports["Daily Attendance Sheet"] = {
       label: __("Designation"),
       fieldtype: "Link",
       options: "Designation",
+			get_query: () => {
+				var company = frappe.query_report.get_filter_value('company');
+				return {
+					filters: {
+						'company': company
+					}
+				}
+			}
     },
   ],
 };
