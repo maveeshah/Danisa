@@ -40,5 +40,5 @@ def get_data(conditions,filters):
 def get_columns():
 	return [ _("Task or Services Required") + "::190",
 	 			_("No. of Casuals") + "::150",
-	     _("From") + "::115",
-		 _("To") + "::150",]
+	     _("From Time") + "::115",
+		 _("To Time") + "::150",]
