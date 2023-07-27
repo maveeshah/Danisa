@@ -24,7 +24,7 @@ def get_conditions(filters):
 	return conds
 
 def get_data(conditions,filters):
-	query = f"""SELECT task_or_services_required, no_of_casuals, from as from_to, to as no_to
+	query = f"""SELECT task_or_services_required, no_of_casuals, from_time, to_time
 				FROM `tabTask or Services Required`
 				WHERE parent in (
 					SELECT name 
