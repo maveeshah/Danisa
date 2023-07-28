@@ -94,9 +94,9 @@ app_license = "MIT"
 # ---------------
 # Override standard doctype classes
 
-# override_doctype_class = {
-#	"ToDo": "custom_app.overrides.CustomToDo"
-# }
+override_doctype_class = {
+	"Attendance": "danisa.overrides.attendance.Attendance"
+}
 
 # Document Events
 # ---------------
@@ -199,3 +199,14 @@ app_license = "MIT"
 # auth_hooks = [
 #	"danisa.auth.validate"
 # ]
+
+fixtures = [
+    {
+        "dt":"Client Script",
+        "filters":[
+            ["module","in",[
+                "Danisa"
+            ]]
+        ]
+    }
+]

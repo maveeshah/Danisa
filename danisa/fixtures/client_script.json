@@ -1,0 +1,13 @@
+[
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Attendance",
+  "enabled": 1,
+  "modified": "2023-07-28 12:15:59.992925",
+  "module": "Danisa",
+  "name": "Shifts and Designations",
+  "script": "frappe.ui.form.on('Attendance', {\n    onload: function(frm) {\n        frm.set_query('shift', function() {\n            return {\n                filters: {\n                    'company': frm.doc.company // Filter shifts based on selected company\n                }\n            };\n        });\n\n        frm.set_query('designation', function() {\n            return {\n                filters: {\n                    'company': frm.doc.company // Filter designations based on selected company\n                }\n            };\n        });\n    },\n\n    company: function(frm) {\n        frm.trigger('set_shift_and_designation_query');\n    },\n\n    set_shift_and_designation_query: function(frm) {\n        frm.set_query('shift', function() {\n            return {\n                filters: {\n                    'company': frm.doc.company\n                }\n            };\n        });\n\n        frm.set_query('designation', function() {\n            return {\n                filters: {\n                    'company': frm.doc.company\n                }\n            };\n        });\n    }\n});\n",
+  "view": "Form"
+ }
+]
