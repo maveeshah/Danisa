@@ -206,7 +206,8 @@ fixtures = [
         "filters":[
             ["module","in",[
                 "Danisa"
-            ]]
+            ]],
+            ["enabled","=",1]
         ]
     }
 ]
