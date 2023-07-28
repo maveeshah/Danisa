@@ -1,0 +1,107 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format: LRF-{YYYY}-{MM}-{####}",
+ "creation": "2023-07-24 14:35:22.839823",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "to",
+  "company",
+  "column_break_4",
+  "date",
+  "area_assigned",
+  "section_break_6",
+  "please_supply_the_following_personel",
+  "amended_from",
+  "submitted_by_user"
+ ],
+ "fields": [
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "To",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "fieldname": "to",
+   "fieldtype": "Link",
+   "label": "From",
+   "options": "Customer Companies",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "area_assigned",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Area Assigned",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_6",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "please_supply_the_following_personel",
+   "fieldtype": "Table",
+   "label": "Please Supply the following personel",
+   "options": "Task or Services Required"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Labour Requisition Form",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "submitted_by_user",
+   "fieldtype": "Read Only",
+   "label": "Submited By:"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2023-07-28 00:21:09.311093",
+ "modified_by": "Administrator",
+ "module": "Danisa",
+ "name": "Labour Requisition Form",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "select": 1,
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
