@@ -16,7 +16,15 @@
   "shift",
   "section_break_91brj",
   "fetch_employees",
-  "employees"
+  "employees",
+  "section_break_rg1en",
+  "status",
+  "attendance_designation",
+  "attendance_amount",
+  "column_break_nwqgf",
+  "attendance_place_of_work",
+  "attendance_shift",
+  "attendance_amount_paid"
  ],
  "fields": [
   {
@@ -70,12 +78,57 @@
    "fieldname": "fetch_employees",
    "fieldtype": "Button",
    "label": "Fetch Employees"
+  },
+  {
+   "fieldname": "section_break_rg1en",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "Present\nAbsent",
+   "reqd": 1
+  },
+  {
+   "fieldname": "attendance_designation",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Attendance Designation",
+   "options": "Designation",
+   "reqd": 1
+  },
+  {
+   "fieldname": "attendance_shift",
+   "fieldtype": "Link",
+   "label": "Attendance Shift",
+   "options": "Shift Type"
+  },
+  {
+   "fieldname": "column_break_nwqgf",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "attendance_place_of_work",
+   "fieldtype": "Data",
+   "label": "Attendance Place of Work"
+  },
+  {
+   "fieldname": "attendance_amount",
+   "fieldtype": "Currency",
+   "label": "Attendance Amount"
+  },
+  {
+   "fieldname": "attendance_amount_paid",
+   "fieldtype": "Currency",
+   "label": "Attendance Amount Paid"
   }
  ],
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2023-08-01 09:41:09.070549",
+ "modified": "2023-08-01 18:19:59.346496",
  "modified_by": "Administrator",
  "module": "Danisa",
  "name": "Multi Attendance Tool",
