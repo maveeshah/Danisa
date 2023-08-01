@@ -14,21 +14,26 @@ class MultiAttendanceTool(Document):
 					WHERE company = '{self.company}'
 					"""
 		employees = frappe.db.sql(query,as_dict=1)
-		# if self.employee_group or self.shift or self.designation:
-		# 	conds = ""
-		# 	conds += " AND employee_group = %(employee_group)s " if self.employee_group else ""
-		# 	conds += " AND shift = %(shift)s " if self.shift else ""
-		# 	conds += " AND designation = %(designation)s " if self.designation else ""
-		# 	conds += " AND company = %(company)s " if self.company else ""
-		# 	filtered_employees = frappe.db.sql(f"""SELECT DISTINCT(employee),employee,name,id_number
-		# 		     								FROM `tabAttendance` 
-		# 		     								WHERE docstatus = 1 
-		# 		     								{conds}""",as_dict=1)[0]
-		# 	if filtered_employees:
-		# 		for emp in filtered_employees:
-		# 			ret_list.append(emp)
-		# return ret_list if ret_list else employees
-		return employees if employees else []
+		if self.employee_group or self.shift or self.designation:
+			conds = ""
+			conds += " AND employee_group = %(employee_group)s " if self.employee_group else ""
+			conds += " AND shift = %(shift)s " if self.shift else ""
+			conds += " AND designation = %(designation)s " if self.designation else ""
+			conds += " AND company = %(company)s " if self.company else ""
+			filtered_employees = frappe.db.sql(f"""SELECT DISTINCT(employee) as name,employee_name, id_number
+												FROM `tabAttendance`
+												WHERE docstatus = 1 
+												{conds}""", as_dict=True, 
+											values={"employee_group": self.employee_group, 
+													"shift": self.shift, 
+													"designation": self.designation, 
+													"company": self.company})
+
+			if filtered_employees:
+				for emp in filtered_employees:
+					ret_list.append(emp)
+		return ret_list if ret_list else employees
+		# return employees if employees else []
 	@frappe.whitelist()
 	def mark_attendance(self):
 		if self.employees:
