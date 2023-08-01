@@ -26,6 +26,20 @@ frappe.ui.form.on('Multi Attendance Tool', {
         }
       }
     })
+    frm.set_query('attendance_designation', function () {
+      return {
+        filters: {
+          company: frm.doc.company
+        }
+      }
+    })
+    frm.set_query('attendance_shift', function () {
+      return {
+        filters: {
+          company: frm.doc.company
+        }
+      }
+    })
   },
 
   company: function (frm) {
@@ -49,6 +63,21 @@ frappe.ui.form.on('Multi Attendance Tool', {
       }
     })
     frm.set_query('employee_group', function () {
+      return {
+        filters: {
+          company: frm.doc.company
+        }
+      }
+    })
+    // 
+    frm.set_query('attendance_designation', function () {
+      return {
+        filters: {
+          company: frm.doc.company
+        }
+      }
+    })
+    frm.set_query('attendance_shift', function () {
       return {
         filters: {
           company: frm.doc.company

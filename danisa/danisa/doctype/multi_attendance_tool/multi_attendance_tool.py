@@ -28,7 +28,7 @@ class MultiAttendanceTool(Document):
 		# 		for emp in filtered_employees:
 		# 			ret_list.append(emp)
 		# return ret_list if ret_list else employees
-		return employees
+		return employees if employees else []
 	@frappe.whitelist()
 	def mark_attendance(self):
 		if self.employees:
@@ -36,12 +36,14 @@ class MultiAttendanceTool(Document):
 				attendance_to_be_marked = frappe.new_doc("Attendance")
 				attendance_to_be_marked.employee = employee.employee
 				attendance_to_be_marked.employee_name = employee.employee_name
-				attendance_to_be_marked.status = employee.status
+				attendance_to_be_marked.status = self.status
 				attendance_to_be_marked.id_number = employee.id_number
-				attendance_to_be_marked.designation = employee.designation
-				attendance_to_be_marked.shift = employee.shift
+				attendance_to_be_marked.designation = self.attendance_designation
+				attendance_to_be_marked.shift = self.attendance_shift
 				attendance_to_be_marked.attendance_date = self.attendance_date
 				attendance_to_be_marked.company = self.company
+				attendance_to_be_marked.amount = self.attendance_amount
+				attendance_to_be_marked.amount_paid = self.attendance_amount_paid
 				attendance_to_be_marked.save(ignore_permissions=True)
 				attendance_to_be_marked.submit()
 			return "Success"
