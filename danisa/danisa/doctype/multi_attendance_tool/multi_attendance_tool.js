@@ -2,6 +2,60 @@
 // For license information, please see license.txt
 
 frappe.ui.form.on('Multi Attendance Tool', {
+  onload: function (frm) {
+    frm.set_query('shift', function () {
+      return {
+        filters: {
+          company: frm.doc.company // Filter shifts based on selected company
+        }
+      }
+    })
+
+    frm.set_query('designation', function () {
+      return {
+        filters: {
+          company: frm.doc.company // Filter designations based on selected company
+        }
+      }
+    })
+
+    frm.set_query('employee_group', function () {
+      return {
+        filters: {
+          company: frm.doc.company // Filter employee_groups based on selected company
+        }
+      }
+    })
+  },
+
+  company: function (frm) {
+    frm.trigger('set_shift_and_designation_query')
+  },
+
+  set_shift_and_designation_query: function (frm) {
+    frm.set_query('shift', function () {
+      return {
+        filters: {
+          company: frm.doc.company
+        }
+      }
+    })
+
+    frm.set_query('designation', function () {
+      return {
+        filters: {
+          company: frm.doc.company
+        }
+      }
+    })
+    frm.set_query('employee_group', function () {
+      return {
+        filters: {
+          company: frm.doc.company
+        }
+      }
+    })
+  },
   refresh: function (frm) {
     if (frm.doc.employees) {
       frm.add_custom_button(__('Mark Attendance'), function () {
@@ -10,10 +64,9 @@ frappe.ui.form.on('Multi Attendance Tool', {
           method: 'mark_attendance',
           callback: function (response) {
             if (response && response.message) {
-              if (response.message == 'Success'){
-                frappe.msgprint("Attendance Marked",alert=true)
-              }
-              else{
+              if (response.message == 'Success') {
+                frappe.msgprint('Attendance Marked', (alert = true))
+              } else {
                 frappe.throw("Couldn't Mark Attendance")
               }
             }
