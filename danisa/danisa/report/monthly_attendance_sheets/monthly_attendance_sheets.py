@@ -302,7 +302,6 @@ def get_employee_related_details(filters: Filters) -> Tuple[Dict, List]:
 	else:
 		for emp in employee_details:
 			emp_map[emp.name] = emp
-	frappe.msgprint(frappe.as_json(emp_map))
 	return emp_map, group_by_param_values
 
 
@@ -365,10 +364,6 @@ def get_rows(
 
 			leave_summary = get_leave_summary(employee, filters)
 			entry_exits_summary = get_entry_exits_summary(employee, filters)
-			frappe.msgprint(frappe.as_json("employee"))
-			frappe.msgprint(frappe.as_json(employee))
-			frappe.msgprint(frappe.as_json("details"))
-			frappe.msgprint(frappe.as_json(details))
 			row = {"employee_name": details.employee_name,"id_number": details.id_number}
 			set_defaults_for_summarized_view(filters, row)
 			row.update(attendance)
@@ -386,7 +381,7 @@ def get_rows(
 			)
 			# set employee details in the first row
 			attendance_for_employee[0].update(
-				{"employee": employee, "employee_name": details.employee_name}
+			{"employee_name": details.employee_name,"id_number": details.id_number}
 			)
 
 			records.extend(attendance_for_employee)
