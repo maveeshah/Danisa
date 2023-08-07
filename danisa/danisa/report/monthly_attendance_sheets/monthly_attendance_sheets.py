@@ -268,6 +268,7 @@ def get_employee_related_details(filters: Filters) -> Tuple[Dict, List]:
 		.select(
 			Employee.name,
 			Employee.employee_name,
+			Employee.id_number,
 			Employee.designation,
 			Employee.grade,
 			Employee.department,
@@ -365,7 +366,7 @@ def get_rows(
 			leave_summary = get_leave_summary(employee, filters)
 			entry_exits_summary = get_entry_exits_summary(employee, filters)
 
-			row = {"employee": employee, "employee_name": details.employee_name}
+			row = {"employee_name": details.employee_name,"id_number": details.id_number}
 			set_defaults_for_summarized_view(filters, row)
 			row.update(attendance)
 			row.update(leave_summary)
