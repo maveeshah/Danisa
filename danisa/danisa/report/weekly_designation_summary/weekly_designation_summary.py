@@ -29,6 +29,7 @@ def get_conditions(filters):
 	conds = ""
 	conds += " AND company = %(company)s " if filters.get("company") else ""
 	conds += " AND shift = %(shift)s " if filters.get("shift") else ""
+	conds += " AND employee_group = %(employee_group)s " if filters.get("employee_group") else ""
 	conds += " AND attendance_date between %(from_date)s AND %(to_date)s " if filters.get("from_date") and filters.get("to_date") else ""
 	return conds
 

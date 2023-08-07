@@ -84,14 +84,8 @@ def get_columns(filters: Filters) -> List[Dict]:
 
 	columns.extend(
 		[
-			{
-				"label": _("Employee"),
-				"fieldname": "employee",
-				"fieldtype": "Link",
-				"options": "Employee",
-				"width": 135,
-			},
 			{"label": _("Employee Name"), "fieldname": "employee_name", "fieldtype": "Data", "width": 120},
+			{"label": _("ID No."), "fieldname": "id_number", "fieldtype": "Data", "width": 120},
 		]
 	)
 
@@ -138,7 +132,6 @@ def get_columns(filters: Filters) -> List[Dict]:
 			]
 		)
 	else:
-		columns.append({"label": _("Shift"), "fieldname": "shift", "fieldtype": "Data", "width": 120})
 		columns.extend(get_columns_for_days(filters))
 
 	return columns
