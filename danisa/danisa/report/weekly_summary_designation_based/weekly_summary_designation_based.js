@@ -29,6 +29,7 @@ frappe.query_reports["Weekly Summary Designation Based"] = {
       label: __("Designation"),
       fieldtype: "Link",
       options: "Designation",
+      default:"Daily Rated",
 			get_query: () => {
 				var company = frappe.query_report.get_filter_value('company');
 				return {
