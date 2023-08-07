@@ -40,10 +40,10 @@ frappe.query_reports["Daily Rated Weekly Earnings"] = {
 			}
 		},
 		{
-			fieldname: "designation",
-			label: __("Designation"),
+			fieldname: "employee_group",
+			label: __("Employee Group"),
 			fieldtype: "Link",
-			options: "Designation",
+			options: "Employee Group",
 			default: "Daily Rated",
 			get_query: () => {
 				var company = frappe.query_report.get_filter_value('company');
