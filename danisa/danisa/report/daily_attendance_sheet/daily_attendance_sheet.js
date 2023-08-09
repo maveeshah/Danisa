@@ -19,32 +19,33 @@ frappe.query_reports["Daily Attendance Sheet"] = {
       default: frappe.datetime.nowdate(),
     },
     {
-      fieldname: "designation",
-      label: __("Designation"),
-      fieldtype: "Link",
-      options: "Designation",
-			get_query: () => {
-				var company = frappe.query_report.get_filter_value('company');
-				return {
-					filters: {
-						'company': company
-					}
-				}
-			}
-    },
-    {
       fieldname: "employee_group",
       label: __("Employee Group"),
       fieldtype: "Link",
       options: "Employee Group",
-			get_query: () => {
-				var company = frappe.query_report.get_filter_value('company');
-				return {
-					filters: {
-						'company': company
-					}
-				}
-			}
+      get_query: () => {
+        var company = frappe.query_report.get_filter_value('company');
+        return {
+          filters: {
+            'company': company
+          }
+        }
+      }
     },
+    {
+      fieldname: "designation",
+      label: __("Designation"),
+      fieldtype: "Link",
+      options: "Designation",
+      get_query: () => {
+        var company = frappe.query_report.get_filter_value('company');
+        return {
+          filters: {
+            'company': company
+          }
+        }
+      }
+    },
+
   ],
 };
