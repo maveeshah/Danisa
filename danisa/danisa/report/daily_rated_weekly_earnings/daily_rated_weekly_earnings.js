@@ -32,8 +32,10 @@ frappe.query_reports["Daily Rated Weekly Earnings"] = {
 			options: "Designation",
 			get_query: () => {
 				var company = frappe.query_report.get_filter_value('company');
+				var employee_group = frappe.query_report.get_filter_value('employee_group');
 				return {
 					filters: {
+						'employee_group': employee_group,
 						'company': company
 					}
 				}
@@ -45,14 +47,14 @@ frappe.query_reports["Daily Rated Weekly Earnings"] = {
 			fieldtype: "Link",
 			options: "Employee Group",
 			default: "Daily Rated",
-			get_query: () => {
-				var company = frappe.query_report.get_filter_value('company');
-				return {
-					filters: {
-						'company': company
-					}
-				}
-			}
+			// get_query: () => {
+			// 	var company = frappe.query_report.get_filter_value('company');
+			// 	return {
+			// 		filters: {
+			// 			'company': company
+			// 		}
+			// 	}
+			// }
 		},
 	],
 };

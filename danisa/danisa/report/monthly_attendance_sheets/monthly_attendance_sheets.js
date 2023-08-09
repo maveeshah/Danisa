@@ -59,14 +59,14 @@ frappe.query_reports["Monthly Attendance Sheets"] = {
 			"fieldtype": "Link",
 			"options": "Employee Group",
 			"default":"Monthly",
-			get_query: () => {
-				var company = frappe.query_report.get_filter_value('company');
-				return {
-					filters: {
-						'company': company
-					}
-				}
-			}
+			// get_query: () => {
+			// 	var company = frappe.query_report.get_filter_value('company');
+			// 	return {
+			// 		filters: {
+			// 			'company': company
+			// 		}
+			// 	}
+			// }
 		},
 		{
 			"fieldname":"summarized_view",
