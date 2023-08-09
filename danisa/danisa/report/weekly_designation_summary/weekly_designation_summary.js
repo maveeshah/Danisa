@@ -44,14 +44,14 @@ frappe.query_reports["Weekly Designation Summary"] = {
       label: __("Employee Group"),
       fieldtype: "Link",
       options: "Employee Group",
-			get_query: () => {
-				var company = frappe.query_report.get_filter_value('company');
-				return {
-					filters: {
-						'company': company
-					}
-				}
-			}
+			// get_query: () => {
+			// 	var company = frappe.query_report.get_filter_value('company');
+			// 	return {
+			// 		filters: {
+			// 			'company': company
+			// 		}
+			// 	}
+			// }
     },
   ],
 };

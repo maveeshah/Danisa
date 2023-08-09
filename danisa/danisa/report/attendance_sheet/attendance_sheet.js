@@ -44,14 +44,14 @@ frappe.query_reports["Attendance Sheet"] = {
 			label: __("Employee Group"),
 			fieldtype: "Link",
 			options: "Employee Group",
-			get_query: () => {
-				var company = frappe.query_report.get_filter_value('company');
-				return {
-					filters: {
-						'company': company
-					}
-				}
-			}
+			// get_query: () => {
+			// 	var company = frappe.query_report.get_filter_value('company');
+			// 	return {
+			// 		filters: {
+			// 			'company': company
+			// 		}
+			// 	}
+			// }
 		},
 	],
 };

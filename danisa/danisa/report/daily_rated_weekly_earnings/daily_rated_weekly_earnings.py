@@ -56,7 +56,8 @@ def get_results(filters,date_list,conds):
 		for date in date_list:
 			status = att_map.get(emp).get(date, ["None"])
 			if  status[0] == "Present":
-				row.append(1)
+				counts = frappe.db.sql(f"SELECT count(*)as total FROM `tabAttendance` WHERE attendance_date = '{date}' and employee = '{emp.name}'",as_dict=1)
+				row.append(counts.total)
 				per_shift =  frappe.db.get_value("Designation",status[1], "amount_per_shift")
 				amount = amount  + per_shift if per_shift else 0
 				total_shifts += 1
