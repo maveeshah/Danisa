@@ -63,12 +63,12 @@ def get_results(filters,date_list,conds):
 											{cond} """,filters,as_dict=1)[0]
 				row.append(counts.total)
 				per_shift =  frappe.db.get_value("Designation",status[1], "amount_per_shift")
-				amount = amount  + per_shift if per_shift else 0
+				amount = float(counts.total) * float(per_shift) if per_shift else 0
 				total_shifts += counts.total
 			else:
 				row.append(0)
 		row.append(total_shifts)
-		row.append(float(amount) * float(total_shifts))	
+		row.append(amount)	
 		data.append(row)
 	return data
 			 
