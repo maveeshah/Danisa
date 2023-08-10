@@ -84,9 +84,26 @@ def get_data(conditions,filters,date_list):
 	return data
 
 
+# def get_columns(date_list):
+# 	columns =  [_("Commodity Type") + ":Link/Commodity Type:150",]
+# 	for day in date_list:
+# 		columns.append(day.strftime("%a") + "::70")
+# 	columns += [_("Total Bags/Bales") +":Int:80",_("Rate") + ":Currency:95",_("Amount") + ":Currency:95"]
+# 	return columns	
 def get_columns(date_list):
-	columns =  [_("Commodity Type") + ":Link/Commodity Type:150",]
-	for day in date_list:
-		columns.append(day.strftime("%a") + "::70")
-	columns += [_("Total Bags/Bales") +":Int:80",_("Rate") + ":Currency:95",_("Amount") + ":Currency:95"]
-	return columns	
+    columns = [
+        {"fieldname": "commodity_type", "label": _("Commodity Type"), "fieldtype": "Link", "options": "Commodity Type", "width": 150},
+    ]
+    
+    for day in date_list:
+        fieldname = day.strftime("%Y-%m-%d")
+        column_label = day.strftime("%a")
+        columns.append({"fieldname": fieldname, "label": fieldname, "fieldtype": "Date", "width": 70})
+    
+    columns += [
+        {"fieldname": "total_bags_bales", "label": _("Total Bags/Bales"), "fieldtype": "Int", "width": 80},
+        {"fieldname": "rate", "label": _("Rate"), "fieldtype": "Currency", "width": 95},
+        {"fieldname": "amount", "label": _("Amount"), "fieldtype": "Currency", "width": 95},
+    ]
+    
+    return columns
