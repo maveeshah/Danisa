@@ -98,7 +98,7 @@ def get_columns(date_list):
     for day in date_list:
         fieldname = day.strftime("%Y-%m-%d")
         column_label = day.strftime("%a")
-        columns.append({"fieldname": fieldname, "label": fieldname, "fieldtype": "Date", "width": 70})
+        columns.append({"fieldname": fieldname, "label": column_label, "fieldtype": "Data", "width": 70})
     
     columns += [
         {"fieldname": "total_bags_bales", "label": _("Total Bags/Bales"), "fieldtype": "Int", "width": 80},
