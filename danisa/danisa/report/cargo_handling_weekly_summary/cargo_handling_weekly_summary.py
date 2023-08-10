@@ -22,8 +22,6 @@ def execute(filters=None):
 	conditions = get_conditions(filters)
 	data = get_data(conditions,filters,date_list)
 	columns = get_columns(date_list)
-	frappe.msgprint(frappe.as_json(data))
-	frappe.msgprint(frappe.as_json(columns))
 	return columns, data
 
 
@@ -66,8 +64,6 @@ def get_data(conditions,filters,date_list):
 								and commodity_type = '{commodity.name}'
 								)"""
 				count = frappe.db.sql(query,filters,as_dict=1)[0]
-				frappe.msgprint(frappe.as_json(date))
-				frappe.msgprint(frappe.as_json(count))
 				row.append(count.total)
 				total += count.total
 			row.append(total)
@@ -98,7 +94,7 @@ def get_columns(date_list):
     for day in date_list:
         fieldname = day.strftime("%Y-%m-%d")
         column_label = day.strftime("%a")
-        columns.append({"fieldname": fieldname, "label": fieldname, "fieldtype": "Date", "width": 70})
+        columns.append({"fieldname": fieldname, "label": column_label, "fieldtype": "Data", "width": 70})
     
     columns += [
         {"fieldname": "total_bags_bales", "label": _("Total Bags/Bales"), "fieldtype": "Int", "width": 80},
