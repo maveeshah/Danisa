@@ -26,20 +26,6 @@ frappe.query_reports["Attendance Sheet"] = {
 			reqd: 1,
 		},
 		{
-			fieldname: "designation",
-			label: __("Designation"),
-			fieldtype: "Link",
-			options: "Designation",
-			get_query: () => {
-				var company = frappe.query_report.get_filter_value('company');
-				return {
-					filters: {
-						'company': company
-					}
-				}
-			}
-		},
-		{
 			fieldname: "employee_group",
 			label: __("Employee Group"),
 			fieldtype: "Link",
@@ -52,6 +38,22 @@ frappe.query_reports["Attendance Sheet"] = {
 			// 		}
 			// 	}
 			// }
+		},
+		{
+			fieldname: "designation",
+			label: __("Designation"),
+			fieldtype: "Link",
+			options: "Designation",
+			get_query: () => {
+				var company = frappe.query_report.get_filter_value('company');
+				var employee_group = frappe.query_report.get_filter_value('employee_group');
+				return {
+					filters: {
+						'employee_group': employee_group,
+						'company': company
+					}
+				}
+			}
 		},
 	],
 };
