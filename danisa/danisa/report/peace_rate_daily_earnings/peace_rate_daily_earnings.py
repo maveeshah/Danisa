@@ -28,6 +28,7 @@ def get_data(conditions,filters):
 				sum(amount_paid)
 				FROM `tabAttendance`
 				WHERE docstatus = 1 {conditions}
+				GROUP BY employee,company,attendance_date,employee_group,designation
 				"""
 	data = frappe.db.sql(query,filters)
 	return data
