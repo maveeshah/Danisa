@@ -64,6 +64,8 @@ def get_data(conditions,filters,date_list):
 								and commodity_type = '{commodity.name}'
 								)"""
 				count = frappe.db.sql(query,filters,as_dict=1)[0]
+				frappe.msgprint(frappe.as_json(date))
+				frappe.msgprint(frappe.as_json(count))
 				row.append(count.total)
 				total += count.total
 			row.append(total)
