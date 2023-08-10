@@ -22,6 +22,8 @@ def execute(filters=None):
 	conditions = get_conditions(filters)
 	data = get_data(conditions,filters,date_list)
 	columns = get_columns(date_list)
+	frappe.msgprint(frappe.as_json(data))
+	frappe.msgprint(frappe.as_json(columns))
 	return columns, data
 
 
