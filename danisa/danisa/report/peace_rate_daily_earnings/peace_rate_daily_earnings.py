@@ -25,7 +25,7 @@ def get_conditions(filters):
 
 def get_data(conditions,filters):
 	query = f"""SELECT employee_name, id_number, shift,
-				amount_paid
+				sum(amount_paid)
 				FROM `tabAttendance`
 				WHERE docstatus = 1 {conditions}
 				"""

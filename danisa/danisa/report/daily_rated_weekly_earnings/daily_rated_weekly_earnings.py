@@ -68,7 +68,7 @@ def get_results(filters,date_list,conds):
 			else:
 				row.append(0)
 		row.append(total_shifts)
-		row.append(amount)	
+		row.append(float(amount) * float(total_shifts))	
 		data.append(row)
 	return data
 			 
