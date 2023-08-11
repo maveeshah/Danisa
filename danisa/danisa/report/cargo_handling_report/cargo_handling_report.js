@@ -29,7 +29,6 @@ frappe.query_reports["Cargo Handling Report"] = {
       label: __("Shift"),
       fieldtype: "Link",
       options: "Shift Type",
-      reqd: 1,
 			get_query: () => {
 				var company = frappe.query_report.get_filter_value('company');
 				return {
@@ -44,7 +43,6 @@ frappe.query_reports["Cargo Handling Report"] = {
       label: __("Operation"),
       fieldtype: "Select",
       options: ["Loading", "Offloading"],
-      reqd: 1,
     },
     {
       fieldname: "godown",
