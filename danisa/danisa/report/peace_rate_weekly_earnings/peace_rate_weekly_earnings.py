@@ -54,12 +54,12 @@ def get_results(filters,date_list,conds):
 			status = att_map.get(emp).get(date, ["None"])
 			if  status[0] == "Present":
 				cond = " AND designation = %(designation)s " if filters.get("designation") else ""
-				counts = frappe.db.sql(f"""SELECT count(*) as total FROM `tabAttendance` WHERE attendance_date = '{date}' 
+				counts = frappe.db.sql(f"""SELECT count(*) as total, sum(amount_paid) as total_paid FROM `tabAttendance` WHERE attendance_date = '{date}' 
 			   								AND employee = '{emp_det.name}'
 											AND docstatus = 1 and status = 'Present'
 											{cond} """,filters,as_dict=1)[0]
-				row.append(status[1])
-				amount = amount + status[1]
+				row.append(counts.total_paid)
+				amount = amount + counts.total_paid
 			else:
 				row.append(0)
 		row.append(amount)	
