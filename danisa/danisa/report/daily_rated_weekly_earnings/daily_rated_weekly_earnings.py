@@ -64,7 +64,7 @@ def get_results(filters,date_list,conds):
 				row.append(counts.total)
 				per_shift =  frappe.db.get_value("Designation",status[1], "amount_per_shift")
 				# amount = float(counts.total) * float(per_shift) if per_shift else 0
-				amount = counts.amount
+				amount += counts.amount
 				total_shifts += counts.total
 			else:
 				row.append(0)
