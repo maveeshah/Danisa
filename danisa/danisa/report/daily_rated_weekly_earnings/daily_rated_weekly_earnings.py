@@ -60,7 +60,7 @@ def get_results(filters,date_list,conds):
 				counts = frappe.db.sql(f"""SELECT count(*)as total,  sum(ifnull(amount,0)) as amount FROM `tabAttendance` WHERE attendance_date = '{date}' 
 			   								AND employee = '{emp_det.name}'
 											AND docstatus = 1 and status = 'Present'
-											{cond} """,filters,as_dict=1)[0]
+											{conds} """,filters,as_dict=1)[0]
 				row.append(counts.total)
 				per_shift =  frappe.db.get_value("Designation",status[1], "amount_per_shift")
 				# amount = float(counts.total) * float(per_shift) if per_shift else 0
