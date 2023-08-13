@@ -30,11 +30,19 @@ def get_columns():
 
 def get_results(filters,conditions):
 	query = """
-		SELECT employee_name, id_number, shift, place_of_work,
-		SUBSTRING(time(in_time), 1, 5) AS in_time, SUBSTRING(time(out_time), 1, 5) AS out_time,
-		case if ADDTIME(TIMEDIFF(TIME(out_time),TIME(in_time)),-8) < 0 then 0 else ADDTIME(TIMEDIFF(TIME(out_time),TIME(in_time)),-8) as overtime
-		FROM `tabAttendance`
-		WHERE docstatus = 1 {0}
-	""".format(conditions)
+				SELECT employee_name, 
+					id_number, 
+					shift, 
+					place_of_work,
+					SUBSTRING(time(in_time), 1, 5) AS in_time, 
+					SUBSTRING(time(out_time), 1, 5) AS out_time,
+					CASE 
+						WHEN ADDTIME(TIMEDIFF(TIME(out_time), TIME(in_time)), '-08:00:00') < '00:00:00' 
+						THEN '00' 
+						ELSE TIME_FORMAT(ADDTIME(TIMEDIFF(TIME(out_time), TIME(in_time)), '-08:00:00'), '%H')
+					END AS overtime
+				FROM `tabAttendance`
+				WHERE docstatus = 1 {0}
+	""".format(conditions,filters)
 
 	return frappe.db.sql(query, filters)
