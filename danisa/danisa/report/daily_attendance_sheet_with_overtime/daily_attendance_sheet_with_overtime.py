@@ -32,7 +32,7 @@ def get_results(filters,conditions):
 	query = """
 		SELECT employee_name, id_number, shift, place_of_work,
 		SUBSTRING(time(in_time), 1, 5) AS in_time, SUBSTRING(time(out_time), 1, 5) AS out_time,
-		TIMEDIFF(TIME(out_time),TIME(in_time)) as overtime
+		case if ADDTIME(TIMEDIFF(TIME(out_time),TIME(in_time)),-8) < 0 then 0 else ADDTIME(TIMEDIFF(TIME(out_time),TIME(in_time)),-8) as overtime
 		FROM `tabAttendance`
 		WHERE docstatus = 1 {0}
 	""".format(conditions)
