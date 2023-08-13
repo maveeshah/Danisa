@@ -39,7 +39,7 @@ def get_results(filters,conditions):
 					CASE 
 						WHEN ADDTIME(TIMEDIFF(TIME(out_time), TIME(in_time)), '-08:00:00') < '00:00:00' 
 						THEN '00' 
-						ELSE TIME_FORMAT(ADDTIME(TIMEDIFF(TIME(out_time), TIME(in_time)), '-08:00:00'), '%H')
+						ELSE SUBSTRING(ADDTIME(TIMEDIFF(TIME(out_time), TIME(in_time)), '-08:00:00'), 1,3)
 					END AS overtime
 				FROM `tabAttendance`
 				WHERE docstatus = 1 {0}
