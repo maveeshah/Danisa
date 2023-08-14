@@ -16,7 +16,7 @@ def execute(filters=None):
 	att = frappe.db.get_list("Attendance",filters={"designation":"Terminal B"},fields=["name"])
 	for i in att:
 		rate = frappe.db.get_value("Designation","Terminal B","pay_rate")
-		frappe.db.sql("fupdate `tabAttendance` set pay_rate_ = {rate} where name = '{i.name}'")	
+		frappe.db.sql(f"update `tabAttendance` set pay_rate_ = {rate} where name = '{i.name}'")	
 	date_list = []
 	current_date = from_date
 	while current_date <= to_date:
