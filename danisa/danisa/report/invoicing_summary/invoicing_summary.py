@@ -19,9 +19,7 @@ def execute(filters=None):
 		date_list.append(current_date)
 		current_date += timedelta(days=1)
 	columns, data = [], []
-	shifts = frappe.db.get_list("Attendance",fields=['shift'])
-	set_shifts = set([shift.shift for shift in shifts])
-	shifts = list([shift for shift in set_shifts])
+	shifts = frappe.db.sql("SELECT DISTINCT(shift) FROM `tabAttendance` WHERE docstatus = 1 AND shift is not null and shift != '' ")
 	columns = get_columns(shifts)
 	conds = get_conds(filters)
 	data = get_data(filters,shifts,conds,date_list)
