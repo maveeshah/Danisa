@@ -13,7 +13,10 @@ def execute(filters=None):
 		filters = {}
 	from_date = getdate(filters.get("from_date"))
 	to_date = getdate(filters.get("to_date"))
-	
+	att = frappe.db.get_list("Attendance",filters={"designation":"Terminal B"},fields=["name"])
+	for i in att:
+		rate = frappe.db.get_value("Designation","Terminal B","pay_rate")
+		frappe.db.sql("fupdate `tabAttendance` set pay_rate_ = {rate} where name = '{i.name}'")	
 	date_list = []
 	current_date = from_date
 	while current_date <= to_date:
@@ -91,10 +94,3 @@ def get_employee_details(filters):
 
 	return emp_map
 
-
-@frappe.whitelist()
-def update_att():
-	att = frappe.db.get_list("Attendance",filters={"designation":"Terminal B"},fields=["name"])
-	for i in att:
-		rate = frappe.db.get_value("Designation","Terminal B","pay_rate")
-		frappe.db.sql("fupdate `tabAttendance` set pay_rate_ = {rate} where name = '{i.name}'")
