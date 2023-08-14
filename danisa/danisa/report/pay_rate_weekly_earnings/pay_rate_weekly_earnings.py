@@ -90,3 +90,11 @@ def get_employee_details(filters):
 		emp_map.setdefault(d.name, d)
 
 	return emp_map
+
+
+@frappe.whitelist()
+def update_att():
+	att = frappe.db.get_list("Attendance",filters={"designation":"Terminal B"},fields=["name"])
+	for i in att:
+		rate = frappe.db.get_value("Designation","Terminal B","pay_rate")
+		frappe.db.sql("fupdate `tabAttendance` set pay_rate_ = {rate} where name = '{i.name}'")
