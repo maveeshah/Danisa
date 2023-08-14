@@ -2,7 +2,7 @@
 // For license information, please see license.txt
 /* eslint-disable */
 
-frappe.query_reports["Pay Rate Weekly Earnings"] = {
+frappe.query_reports["Pay Rate Weekly Designation Summary"] = {
 	filters: [
 		{
 			fieldname: "company",
@@ -26,27 +26,24 @@ frappe.query_reports["Pay Rate Weekly Earnings"] = {
 			default: frappe.datetime.nowdate(),
 		},
 		{
-			fieldname: "employee_group",
-			label: __("Employee Group"),
+			fieldname: "shift",
+			label: __("Shift"),
 			fieldtype: "Link",
-			options: "Employee Group",
-			default: "Daily Rated",
-		},
-		{
-			fieldname: "designation",
-			label: __("Designation"),
-			fieldtype: "Link",
-			options: "Designation",
+			options: "Shift Type",
 			get_query: () => {
 				var company = frappe.query_report.get_filter_value('company');
-				var employee_group = frappe.query_report.get_filter_value('employee_group');
 				return {
 					filters: {
-						'employee_group': employee_group,
 						'company': company
 					}
 				}
 			}
+		},
+		{
+			fieldname: "employee_group",
+			label: __("Employee Group"),
+			fieldtype: "Link",
+			options: "Employee Group",
 		},
 	],
 };
