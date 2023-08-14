@@ -31,7 +31,7 @@ def get_conds(filters):
 	conds += " AND company = %(company)s " if filters.get('company') else ""
 	conds += " AND attendance_date between %(from_date)s and %(to_date)s " if filters.get('from_date') and filters.get('to_date') else ""
 	conds += " AND employee_group = %(employee_group)s " if filters.get('employee_group') else ""
-	conds += " AND department = %(department)s " if filters.get('department') else ""
+	# conds += " AND department = %(department)s " if filters.get('department') else ""
 	conds += " AND designation = %(designation)s " if filters.get('designation') else ""
 	return conds
 
