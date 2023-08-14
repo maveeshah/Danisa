@@ -20,8 +20,8 @@ def execute(filters=None):
 		current_date += timedelta(days=1)
 	columns, data = [], []
 	shifts = frappe.db.get_list("Attendance",fields=['shift'])
-	set_shift = set(shifts)
-	shifts = list([shift for shift in shifts])
+	set_shifts = set([shift.shift for shift in shifts])
+	shifts = list([shift for shift in set_shifts])
 	columns = get_columns(shifts)
 	conds = get_conds(filters)
 	data = get_data(filters,shifts,conds,date_list)
@@ -54,7 +54,7 @@ def get_data(filters,shifts,conds,date_list):
 		row = [date,date.strftime("%A")]
 		for shift in shifts:
 			query = """
-						SELECT count(*) as total
+						SELECT count(*) as total,
 							sum(CASE 
 								WHEN ADDTIME(TIMEDIFF(TIME(out_time), TIME(in_time)), '-08:00:00') < '00:00:00' 
 								THEN '00' 
@@ -63,7 +63,8 @@ def get_data(filters,shifts,conds,date_list):
 						FROM `tabAttendance`
 						WHERE docstatus = 1
 						status = 'Present'
-						shift = '{1}' {0}
-			""".format(conds,shift,filters)			
+						shift = '{1}' AND
+						attendance_date = '{2}'
+						{0}""".format(conds,shift,date,filters)			
 			res = frappe.db.sql(query, filters)
 			frappe.throw(frappe.as_json(res))
