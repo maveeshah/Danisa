@@ -30,7 +30,7 @@ frappe.query_reports["Pay Rate Weekly Earnings"] = {
 			label: __("Employee Group"),
 			fieldtype: "Link",
 			options: "Employee Group",
-			default: "Daily Rated",
+			// default: "Daily Rated",
 		},
 		{
 			fieldname: "designation",
