@@ -43,14 +43,14 @@ def get_conds(filters):
 	return conds
 
 def get_columns(shifts):
-	columns = [ _("Date") + ":Date:190",_("Day") + "::190"]
+	columns = [ _("Date") + ":Date:135",_("Day") + "::135"]
 	for shift in shifts:
-		columns += [_(f"{shift} Head Count") + ":Int:95",_(f"{shift} Overtime Hrs") + ":Int:95"]
-	columns += [_("Total Head Count") + ":Int:95",_("Total Overtime Hrs") + ":Int:95"]
-	columns += [_("Amount Head Count") + ":Currency:95",
-	     			_("Amount Overtime Hrs") + ":Currency:95",
-	     			_("Amount Management Fee") + ":Currency:95",
-	     			_("Total Amount") + ":Currency:95"]
+		columns += [_(f"{shift} Head Count") + ":Int:135",_(f"{shift} Overtime Hrs") + ":Int:135"]
+	columns += [_("Total Head Count") + ":Int:135",_("Total Overtime Hrs") + ":Int:135"]
+	columns += [_("Amount Head Count") + ":Currency:135",
+	     			_("Amount Overtime Hrs") + ":Currency:135",
+	     			_("Amount Management Fee") + ":Currency:135",
+	     			_("Total Amount") + ":Currency:135"]
 	return columns
 
 def get_data(filters,shifts,conds,date_list):
