@@ -19,10 +19,18 @@ def execute(filters=None):
 		date_list.append(current_date)
 		current_date += timedelta(days=1)
 	columns, data = [], []
-	shifts = frappe.db.sql("SELECT DISTINCT(shift) FROM `tabAttendance` WHERE docstatus = 1 AND shift is not null and shift != '' ")
+	company = filters.get("company")
+	shift_query = f"""SELECT DISTINCT(shift) as shift 
+					FROM `tabAttendance` 
+					WHERE docstatus = 1 
+					AND shift is not null AND shift != '' AND company = '{company}' """
+	shifts = frappe.db.sql(shift_query)
+	shifts = [shift[0] for shift in shifts]
 	columns = get_columns(shifts)
 	conds = get_conds(filters)
 	data = get_data(filters,shifts,conds,date_list)
+	frappe.msgprint(frappe.as_json(data))
+	frappe.msgprint(frappe.as_json(columns))
 	return columns, data
 
 
@@ -31,19 +39,19 @@ def get_conds(filters):
 	conds += " AND company = %(company)s " if filters.get('company') else ""
 	conds += " AND attendance_date between %(from_date)s and %(to_date)s " if filters.get('from_date') and filters.get('to_date') else ""
 	conds += " AND employee_group = %(employee_group)s " if filters.get('employee_group') else ""
-	# conds += " AND department = %(department)s " if filters.get('department') else ""
+	conds += " AND department = %(department)s " if filters.get('department') else ""
 	conds += " AND designation = %(designation)s " if filters.get('designation') else ""
 	return conds
 
 def get_columns(shifts):
-	columns = [ _("Employee Name") + "::190",_("ID No.") + "::190",_("Phone No") + "::190"]
+	columns = [ _("Date") + ":Date:190",_("Day") + "::190"]
 	for shift in shifts:
 		columns += [_(f"{shift} Head Count") + ":Int:95",_(f"{shift} Overtime Hrs") + ":Int:95"]
 	columns += [_("Total Head Count") + ":Int:95",_("Total Overtime Hrs") + ":Int:95"]
-	columns += [_("Amount Head Count") + ":Currency:95",
-	     			_("Amount Overtime Hrs") + ":Currency:95",
-	     			_("Amount Management Fee") + ":Currency:95",
-	     			_("Total Amount") + ":Currency:95"]
+	# columns += [_("Amount Head Count") + ":Currency:95",
+	#      			_("Amount Overtime Hrs") + ":Currency:95",
+	#      			_("Amount Management Fee") + ":Currency:95",
+	#      			_("Total Amount") + ":Currency:95"]
 	return columns
 
 def get_data(filters,shifts,conds,date_list):
@@ -59,10 +67,28 @@ def get_data(filters,shifts,conds,date_list):
 								ELSE SUBSTRING(ADDTIME(TIMEDIFF(TIME(out_time), TIME(in_time)), '-08:00:00'), 1,2)
 							END) AS overtime
 						FROM `tabAttendance`
-						WHERE docstatus = 1
-						status = 'Present'
+						WHERE docstatus = 1 AND
+						status = 'Present' AND
 						shift = '{1}' AND
 						attendance_date = '{2}'
-						{0}""".format(conds,shift,date,filters)			
-			res = frappe.db.sql(query, filters)
-			frappe.throw(frappe.as_json(res))
+						{0}""".format(conds,shift,date,filters)
+			res = frappe.db.sql(query, filters,as_dict=1)[0]
+			row.append(res.total)
+			row.append(res.overtime)
+		query = """SELECT count(*) as total,
+						SUM(CASE 
+							WHEN ADDTIME(TIMEDIFF(TIME(out_time), TIME(in_time)), '-08:00:00') < '00:00:00' 
+							THEN '00' 
+							ELSE SUBSTRING(ADDTIME(TIMEDIFF(TIME(out_time), TIME(in_time)), '-08:00:00'), 1,2)
+						END) AS overtime
+					FROM `tabAttendance`
+					WHERE docstatus = 1 AND
+					status = 'Present' AND
+					attendance_date = '{2}'
+					{0}""".format(conds,shift,date,filters)
+		total_res = frappe.db.sql(query, filters,as_dict=1)[0]
+		row.append(total_res.total)
+		row.append(total_res.overtime)
+		
+		data.append(row)
+	return data
