@@ -30,8 +30,6 @@ frappe.query_reports["Invoicing Summary"] = {
 			label: __("Employee Group"),
 			fieldtype: "Link",
 			options: "Employee Group",
-			// reqd: 1,
-			// default: "Daily Rated",
 		},
 		{
 			fieldname: "department",
