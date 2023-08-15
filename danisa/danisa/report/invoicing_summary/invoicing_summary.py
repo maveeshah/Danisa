@@ -29,8 +29,6 @@ def execute(filters=None):
 	columns = get_columns(shifts)
 	conds = get_conds(filters)
 	data = get_data(filters,shifts,conds,date_list)
-	frappe.msgprint(frappe.as_json(data))
-	frappe.msgprint(frappe.as_json(columns))
 	return columns, data
 
 
@@ -48,10 +46,10 @@ def get_columns(shifts):
 	for shift in shifts:
 		columns += [_(f"{shift} Head Count") + ":Int:95",_(f"{shift} Overtime Hrs") + ":Int:95"]
 	columns += [_("Total Head Count") + ":Int:95",_("Total Overtime Hrs") + ":Int:95"]
-	# columns += [_("Amount Head Count") + ":Currency:95",
-	#      			_("Amount Overtime Hrs") + ":Currency:95",
-	#      			_("Amount Management Fee") + ":Currency:95",
-	#      			_("Total Amount") + ":Currency:95"]
+	columns += [_("Amount Head Count") + ":Currency:95",
+	     			_("Amount Overtime Hrs") + ":Currency:95",
+	     			_("Amount Management Fee") + ":Currency:95",
+	     			_("Total Amount") + ":Currency:95"]
 	return columns
 
 def get_data(filters,shifts,conds,date_list):
@@ -89,6 +87,14 @@ def get_data(filters,shifts,conds,date_list):
 		total_res = frappe.db.sql(query, filters,as_dict=1)[0]
 		row.append(total_res.total)
 		row.append(total_res.overtime)
-		
+		rates = frappe.db.get_list("Designation",filters.get("designation"),fields=["normal_rate","overtime_rate","management_fee"])
+		frappe.msgprint(frappe.as_json(rates))
+		total_amount_of_heads = float(total_res.total) * rates[0].normal_rate
+		total_amount_of_overtime = float(total_res.total) * rates[0].overtime_rate
+		total_management_amount = float(total_res.total) * rates[0].management_fee
+		row.append(total_amount_of_heads)
+		row.append(total_amount_of_overtime)
+		row.append(total_management_amount)
+		row.append(total_management_amount + total_amount_of_heads + total_amount_of_overtime)
 		data.append(row)
 	return data
