@@ -38,25 +38,31 @@ def get_results(filters,conditions):
 				SUBSTRING(time(in_time), 1, 5) AS in_time, 
 				SUBSTRING(time(out_time), 1, 5) AS out_time,
 				CASE 
-					WHEN ADDTIME(TIMEDIFF(out_time, in_time), '-08:00:00') < '00:00:00' THEN '00:00'
+					WHEN ADDTIME(TIMEDIFF(out_time, in_time), '-08:00:00') < '00:00:00' THEN '0'
 					ELSE 
-						CONCAT(
+						FORMAT(
 							FLOOR(
 								TIME_TO_SEC(
 									ADDTIME(TIMEDIFF(out_time, in_time), '-08:00:00')
-								) / 5400
-							),
-							':',
-							LPAD(
+								) / 3600
+							) + 
+							FLOOR(
 								MOD(
 									TIME_TO_SEC(
 										ADDTIME(TIMEDIFF(out_time, in_time), '-08:00:00')
-									), 
-									5400
-								) / 60,
-								2,
-								'0'
-							)
+									),
+									3600
+								) / 1800
+							) * 0.5 +
+							FLOOR(
+								MOD(
+									TIME_TO_SEC(
+										ADDTIME(TIMEDIFF(out_time, in_time), '-08:00:00')
+									),
+									1800
+								) / 900
+							) * 0.25,
+							2
 						)
 				END AS overtime
 			FROM `tabAttendance`
