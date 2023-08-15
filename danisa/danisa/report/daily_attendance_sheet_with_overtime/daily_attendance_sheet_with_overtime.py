@@ -17,9 +17,9 @@ def execute(filters=None):
 	for attendance in att:
 		res_time = frappe.db.get_value("Designation",attendance.designation,"rest_time")
 		if res_time:
-			frappe.db.update("Attendance",attendance[0].name,"rest_time",res_time[0].rest_time)
+			frappe.db.update("Attendance",attendance.name,"rest_time",res_time[0].rest_time)
 		else:
-			frappe.db.update("Attendance",attendance[0].name,"rest_time",0)
+			frappe.db.update("Attendance",attendance.name,"rest_time",0)
 
 
 	conditions = get_conditions(filters)
