@@ -33,37 +33,37 @@ frappe.query_reports["Invoicing Summary"] = {
 			// reqd: 1,
 			// default: "Daily Rated",
 		},
-		// {
-		// 	fieldname: "department",
-		// 	label: __("Department"),
-		// 	fieldtype: "Link",
-		// 	options: "Departments",
-		// 	get_query: () => {
-		// 		var company = frappe.query_report.get_filter_value('company');
-		// 		return {
-		// 			filters: {
-		// 				'company': company,
-		// 			}
-		// 		}
-		// 	}
-		// },
-		// {
-		// 	fieldname: "designation",
-		// 	label: __("Designation"),
-		// 	fieldtype: "Link",
-		// 	options: "Designation",
-		// 	reqd:1,
-		// 	get_query: () => {
-		// 		var company = frappe.query_report.get_filter_value('company');
-		// 		var employee_group = frappe.query_report.get_filter_value('employee_group');
-		// 		return {
-		// 			filters: {
-		// 				'company': company,
-		// 				'employee_group': employee_group
-		// 			}
-		// 		}
-		// 	}
-		// },
+		{
+			fieldname: "department",
+			label: __("Department"),
+			fieldtype: "Link",
+			options: "Departments",
+			get_query: () => {
+				var company = frappe.query_report.get_filter_value('company');
+				return {
+					filters: {
+						'company': company,
+					}
+				}
+			}
+		},
+		{
+			fieldname: "designation",
+			label: __("Designation"),
+			fieldtype: "Link",
+			options: "Designation",
+			reqd:1,
+			get_query: () => {
+				var company = frappe.query_report.get_filter_value('company');
+				var employee_group = frappe.query_report.get_filter_value('employee_group');
+				return {
+					filters: {
+						'company': company,
+						'employee_group': employee_group
+					}
+				}
+			}
+		},
 
 	],
 };
