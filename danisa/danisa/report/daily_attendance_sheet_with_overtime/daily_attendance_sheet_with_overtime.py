@@ -16,7 +16,7 @@ def execute(filters=None):
 		     and designation is not null """,as_dict=1)
 	frappe.msgprint(frappe.as_json(att))
 	for attendance in att:
-		res_time = frappe.db.get_value("Designation",attendance[0].designation,"rest_time")
+		res_time = frappe.db.get_value("Designation",attendance.designation,"rest_time")
 		frappe.db.update("Attendance",attendance[0].name,"rest_time",res_time[0].rest_time)
 
 	conditions = get_conditions(filters)
