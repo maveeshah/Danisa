@@ -87,7 +87,7 @@ def get_data(filters,shifts,conds,date_list):
 		total_res = frappe.db.sql(query, filters,as_dict=1)[0]
 		row.append(total_res.total)
 		row.append(total_res.overtime)
-		rates = frappe.db.get_list("Designation",filters.get("designation"),fields=["normal_rate","overtime_rate","management_fee"])
+		rates = frappe.db.get_list("Designation",filters={"name":filters.get("designation")},fields=["normal_rate","overtime_rate","management_fee"])
 		frappe.msgprint(frappe.as_json(rates))
 		total_amount_of_heads = float(total_res.total) * rates[0].normal_rate
 		total_amount_of_overtime = float(total_res.total) * rates[0].overtime_rate
