@@ -23,7 +23,8 @@ def execute(filters=None):
 	shift_query = f"""SELECT DISTINCT(shift) as shift 
 					FROM `tabAttendance` 
 					WHERE docstatus = 1 
-					AND shift is not null AND shift != '' AND company = '{company}' """
+					AND shift is not null AND shift != '' AND company = '{company}' 
+					AND company is not null  AND company != ''"""
 	shifts = frappe.db.sql(shift_query)
 	shifts = [shift[0] for shift in shifts]
 	columns = get_columns(shifts)
