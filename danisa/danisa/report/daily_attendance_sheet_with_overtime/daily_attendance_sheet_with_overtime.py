@@ -9,6 +9,11 @@ def execute(filters=None):
 	if not filters:
 		filters = {}
 	columns, data = [], []
+	att = frappe.db.get_all("Attendance",{"docstatus":1,"status":1},["name","designation"])
+	for attendance in att:
+		res_time = frappe.db.get_value("Designation",attendance[0].designation,"rest_time")
+		frappe.db.update("Attendance",attendance[0].name,"rest_time",res_time[0].rest_time)
+
 	conditions = get_conditions(filters)
 	columns = get_columns()
 	data = get_results(filters,conditions)
@@ -29,6 +34,7 @@ def get_columns():
 	
 
 def get_results(filters,conditions):
+
 	query = """
 			SELECT 
 				employee_name, 
