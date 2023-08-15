@@ -9,7 +9,11 @@ def execute(filters=None):
 	if not filters:
 		filters = {}
 	columns, data = [], []
-	att = frappe.db.sql("SELECT name,designation FROM `tabAttendance` WHERE docstatus = 1 AND status = 'Present' and designation is not null ")
+	att = frappe.db.sql("""SELECT name,designation 
+		     FROM `tabAttendance` 
+		     WHERE docstatus = 1 
+		     AND status = 'Present' 
+		     and designation is not null """,as_dict=1)
 	frappe.msgprint(frappe.as_json(att))
 	for attendance in att:
 		res_time = frappe.db.get_value("Designation",attendance[0].designation,"rest_time")
