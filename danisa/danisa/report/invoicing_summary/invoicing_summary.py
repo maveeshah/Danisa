@@ -154,6 +154,7 @@ def get_data(filters,shifts,conds,date_list):
 		total_amount_of_heads = float(total_res.total) * float(rates[0].normal_rate)
 		total_amount_of_overtime = float(total_res.overtime) * float(rates[0].overtime_rate)
 		total_management_amount = float(total_res.total) * float(rates[0].management_fee)
+		frappe.msgprint(frappe.as_json(total_res))
 		row.append(total_amount_of_heads)
 		row.append(total_amount_of_overtime)
 		row.append(total_management_amount)
