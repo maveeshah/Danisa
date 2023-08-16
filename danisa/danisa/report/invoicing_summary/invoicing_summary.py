@@ -60,11 +60,37 @@ def get_data(filters,shifts,conds,date_list):
 		for shift in shifts:
 			query = """
 						SELECT count(*) as total,
-							sum(CASE 
-								WHEN ADDTIME(TIMEDIFF(TIME(out_time), TIME(in_time)), '-08:00:00') < '00:00:00' 
-								THEN '00' 
-								ELSE SUBSTRING(ADDTIME(TIMEDIFF(TIME(out_time), TIME(in_time)), '-08:00:00'), 1,2)
-							END) AS overtime
+							SUM(
+								CASE 
+									WHEN ADDTIME(TIMEDIFF(out_time, in_time), '-08:00:00') < '00:00:00' THEN '0'
+									ELSE 
+										FORMAT(
+											FLOOR(
+												TIME_TO_SEC(
+													ADDTIME(TIMEDIFF(out_time, in_time), '-08:00:00')
+												) / 3600
+											) + 
+											FLOOR(
+												MOD(
+													TIME_TO_SEC(
+														ADDTIME(TIMEDIFF(out_time, in_time), '-08:00:00')
+													),
+													3600
+												) / 1800
+											) * 0.5 +
+											FLOOR(
+												MOD(
+													TIME_TO_SEC(
+														ADDTIME(TIMEDIFF(out_time, in_time), '-08:00:00')
+													),
+													1800
+												) / 900
+											) * 0.25
+											- rest_time,
+											2
+										)
+								END
+							) AS overtime
 						FROM `tabAttendance`
 						WHERE docstatus = 1 AND
 						status = 'Present' AND
@@ -74,12 +100,48 @@ def get_data(filters,shifts,conds,date_list):
 			res = frappe.db.sql(query, filters,as_dict=1)[0]
 			row.append(res.total)
 			row.append(res.overtime)
+		# SELECT count(*) as total,
+		# 				SUM(CASE 
+		# 					WHEN ADDTIME(TIMEDIFF(TIME(out_time), TIME(in_time)), '-08:00:00') < '00:00:00' 
+		# 					THEN '00' 
+		# 					ELSE SUBSTRING(ADDTIME(TIMEDIFF(TIME(out_time), TIME(in_time)), '-08:00:00'), 1,2)
+		# 				END) AS overtime
+		# 			FROM `tabAttendance`
+		# 			WHERE docstatus = 1 AND
+		# 			status = 'Present' AND
+		# 			attendance_date = '{2}'
 		query = """SELECT count(*) as total,
-						SUM(CASE 
-							WHEN ADDTIME(TIMEDIFF(TIME(out_time), TIME(in_time)), '-08:00:00') < '00:00:00' 
-							THEN '00' 
-							ELSE SUBSTRING(ADDTIME(TIMEDIFF(TIME(out_time), TIME(in_time)), '-08:00:00'), 1,2)
-						END) AS overtime
+					SUM(
+						CASE 
+							WHEN ADDTIME(TIMEDIFF(out_time, in_time), '-08:00:00') < '00:00:00' THEN '0'
+							ELSE 
+								FORMAT(
+									FLOOR(
+										TIME_TO_SEC(
+											ADDTIME(TIMEDIFF(out_time, in_time), '-08:00:00')
+										) / 3600
+									) + 
+									FLOOR(
+										MOD(
+											TIME_TO_SEC(
+												ADDTIME(TIMEDIFF(out_time, in_time), '-08:00:00')
+											),
+											3600
+										) / 1800
+									) * 0.5 +
+									FLOOR(
+										MOD(
+											TIME_TO_SEC(
+												ADDTIME(TIMEDIFF(out_time, in_time), '-08:00:00')
+											),
+											1800
+										) / 900
+									) * 0.25
+									- rest_time,
+									2
+								)
+						END
+					) AS overtime
 					FROM `tabAttendance`
 					WHERE docstatus = 1 AND
 					status = 'Present' AND
@@ -92,6 +154,7 @@ def get_data(filters,shifts,conds,date_list):
 		total_amount_of_heads = float(total_res.total) * float(rates[0].normal_rate)
 		total_amount_of_overtime = float(total_res.overtime) * float(rates[0].overtime_rate)
 		total_management_amount = float(total_res.total) * float(rates[0].management_fee)
+		frappe.msgprint(frappe.as_json(total_res))
 		row.append(total_amount_of_heads)
 		row.append(total_amount_of_overtime)
 		row.append(total_management_amount)
