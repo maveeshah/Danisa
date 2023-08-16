@@ -151,9 +151,16 @@ def get_data(filters,shifts,conds,date_list):
 		row.append(total_res.total)
 		row.append(total_res.overtime)
 		rates = frappe.db.get_list("Designation",filters={"name":filters.get("designation")},fields=["normal_rate","overtime_rate","management_fee"])
-		total_amount_of_heads = float(total_res.total) * float(rates[0].normal_rate)
-		total_amount_of_overtime = float(total_res.overtime) * float(rates[0].overtime_rate)
-		total_management_amount = float(total_res.total) * float(rates[0].management_fee)
+		normal_rate = overtime_rate = management_fee = 0
+		if rates[0].normal_rate:
+			normal_rate = rates[0].normal_rate
+		if rates[0].overtime_rate:
+			overtime_rate = rates[0].overtime_rate
+		if rates[0].management_fee:
+			management_fee = rates[0].management_fee
+		total_amount_of_heads = float(total_res.total) * float(normal_rate)
+		total_amount_of_overtime = float(total_res.overtime) * float(overtime_rate)
+		total_management_amount = float(total_res.total) * float(management_fee)
 		row.append(total_amount_of_heads)
 		row.append(total_amount_of_overtime)
 		row.append(total_management_amount)
