@@ -27,6 +27,9 @@ def execute(filters=None):
 					AND shift is not null AND shift != '' AND company = '{company}' and employee_group = '{emp_group}'
 					AND company is not null  AND company != ''"""
 	shifts = frappe.db.sql(shift_query)
+	if not shifts:
+		return columns, data
+
 	shifts = [shift[0] for shift in shifts]
 	columns = get_columns(shifts)
 	conds = get_conds(filters)
