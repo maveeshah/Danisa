@@ -125,4 +125,10 @@ def get_results(filters,conditions):
 			WHERE docstatus = 1 {0}
 	""".format(conditions,filters)
 
-	return frappe.db.sql(query, filters)
+	results = frappe.db.sql(query, filters)
+	total_ot = 0.00
+	for row in results:
+		total_ot += row[-1]
+	row_end = ['Total','','','','','',total_ot]
+	results.append(row_end)
+	return results
