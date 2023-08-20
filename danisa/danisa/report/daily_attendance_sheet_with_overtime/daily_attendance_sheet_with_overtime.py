@@ -124,11 +124,12 @@ def get_results(filters,conditions):
 			FROM `tabAttendance`
 			WHERE docstatus = 1 {0}
 	""".format(conditions,filters)
-
+	data = []
 	results = frappe.db.sql(query, filters)
 	total_ot = 0.00
 	for row in results:
-		total_ot += row[-1]
+		total_ot += float(row[-1])
+		data.append(row)
 	row_end = ['Total','','','','','',total_ot]
-	results.append(row_end)
-	return results
+	data.append(row_end)
+	return data
