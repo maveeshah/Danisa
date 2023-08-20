@@ -1,5 +1,5 @@
 {
- "add_total_row": 0,
+ "add_total_row": 1,
  "columns": [],
  "creation": "2023-08-13 07:19:50.846092",
  "disable_prepared_report": 0,
@@ -9,7 +9,7 @@
  "filters": [],
  "idx": 0,
  "is_standard": "Yes",
- "modified": "2023-08-13 07:19:50.846092",
+ "modified": "2023-08-20 12:19:11.196856",
  "modified_by": "Administrator",
  "module": "Danisa",
  "name": "Daily Attendance Sheet with Overtime",

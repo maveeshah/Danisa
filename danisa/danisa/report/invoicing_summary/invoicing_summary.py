@@ -20,10 +20,11 @@ def execute(filters=None):
 		current_date += timedelta(days=1)
 	columns, data = [], []
 	company = filters.get("company")
+	emp_group = filters.get("employee_group")
 	shift_query = f"""SELECT DISTINCT(shift) as shift 
 					FROM `tabAttendance` 
 					WHERE docstatus = 1 
-					AND shift is not null AND shift != '' AND company = '{company}' 
+					AND shift is not null AND shift != '' AND company = '{company}' and employee_group = '{emp_group}'
 					AND company is not null  AND company != ''"""
 	shifts = frappe.db.sql(shift_query)
 	shifts = [shift[0] for shift in shifts]
