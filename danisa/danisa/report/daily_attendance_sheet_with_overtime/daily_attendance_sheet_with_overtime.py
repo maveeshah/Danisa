@@ -39,7 +39,7 @@ def get_conditions(filters):
 	return conds
 
 def get_columns():
-	return  [ _("Employee Name") + "::190", _("ID. No.") + "::150",_("Shift") + "::150",_("Place of Work") + "::150",_("Time In") + "::150",_("Time Out") + "::150",_("Overtime") + "::150"]
+	return  [ _("Employee Name") + "::190", _("ID. No.") + "::150",_("Shift") + "::150",_("Place of Work") + "::150",_("Time In") + "::150",_("Time Out") + "::150",_("Overtime") + ":Int:150"]
 	
 
 def get_results(filters,conditions):
