@@ -213,6 +213,7 @@ fixtures = [
     {
         "dt":"Role",
         "filters":[
-            ["is_custom","=",1]        ]
-    },
+            ["is_custom","=",1]
+            ]
+    }
 ]
