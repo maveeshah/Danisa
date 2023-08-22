@@ -216,14 +216,7 @@ fixtures = [
     {
         "dt":"Role",
         "filters":[
-<<<<<<< HEAD
-            ["is_custom","=",1]        ]
+            ["is_custom","=",1]        
+			]
     },
 ]
->>>>>>> 3da2e2d02691ab8064588d49fffb0e0416f5b26c
-=======
-            ["is_custom","=",1]
-            ]
-    }
-]
->>>>>>> c6ef542f91c112fe576a459e9f76c2242d63588e
