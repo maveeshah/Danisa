@@ -208,12 +208,8 @@ fixtures = [
             ]],
             ["enabled","=",1]
         ]
-<<<<<<< HEAD
-    }
-]
-=======
     },
-    {
+        {
         "dt":"Role",
         "filters":[
             ["is_custom","=",1]        
