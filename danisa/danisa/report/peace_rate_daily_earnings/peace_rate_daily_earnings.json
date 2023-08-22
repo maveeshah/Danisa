@@ -9,7 +9,7 @@
  "filters": [],
  "idx": 0,
  "is_standard": "Yes",
- "modified": "2023-08-20 11:02:05.681540",
+ "modified": "2023-08-22 23:40:18.740451",
  "modified_by": "Administrator",
  "module": "Danisa",
  "name": "Peace Rate Daily Earnings",
@@ -27,6 +27,12 @@
   },
   {
    "role": "HR Manager"
+  },
+  {
+   "role": "Manager"
+  },
+  {
+   "role": "Clerk"
   }
  ]
 }
