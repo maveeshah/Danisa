@@ -1,6 +1,6 @@
 ## Danisa
 
-Customizations for Danista
+Customizations for Danisa
 
 #### License
 
