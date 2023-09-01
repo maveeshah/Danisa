@@ -26,32 +26,33 @@ frappe.query_reports["Weekly Designation Summary"] = {
       default: frappe.datetime.nowdate(),
     },
     {
+      fieldname: "employee_group",
+      label: __("Employee Group"),
+      fieldtype: "Link",
+      options: "Employee Group",
+      default: "Daily Rated"
+    },
+    {
       fieldname: "shift",
       label: __("Shift"),
       fieldtype: "Link",
       options: "Shift Type",
 			get_query: () => {
-				var company = frappe.query_report.get_filter_value('company');
+				var company = ''
+        if (frappe.query_report.get_filter_value('company')){
+          company = frappe.query_report.get_filter_value('company');
+        };
+				var employee_group = ''
+        if (frappe.query_report.get_filter_value('employee_group')){
+          employee_group = frappe.query_report.get_filter_value('employee_group');
+        };
 				return {
 					filters: {
-						'company': company
+						'company': company,
+						'employee_group': employee_group
 					}
 				}
 			}
-    },
-    {
-      fieldname: "employee_group",
-      label: __("Employee Group"),
-      fieldtype: "Link",
-      options: "Employee Group",
-			// get_query: () => {
-			// 	var company = frappe.query_report.get_filter_value('company');
-			// 	return {
-			// 		filters: {
-			// 			'company': company
-			// 		}
-			// 	}
-			// }
     },
   ],
 };

@@ -37,7 +37,7 @@ def get_columns(date_list):
 	columns = [ _("Designation Name") + "::190"]
 	for day in date_list:
 		columns.append(day.strftime("%a") + "::70")
-	columns += [_("Total Shifts") +":Int:80",_("Rate") + ":Currency:95",_("Amount") + ":Currency:95"]
+	columns += [_("Total") +":Int:80",_("Rate") + ":Currency:95",_("Amount") + ":Currency:95"]
 	return columns
 
 def get_results(filters,date_list,conds):

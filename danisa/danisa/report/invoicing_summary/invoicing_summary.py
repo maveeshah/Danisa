@@ -19,14 +19,14 @@ def execute(filters=None):
 		date_list.append(current_date)
 		current_date += timedelta(days=1)
 	columns, data = [], []
-	company = filters.get("company")
-	emp_group = filters.get("employee_group")
-	shift_query = f"""SELECT DISTINCT(shift) as shift 
-					FROM `tabAttendance` 
-					WHERE docstatus = 1 
-					AND shift is not null AND shift != '' AND company = '{company}' and employee_group = '{emp_group}'
-					AND company is not null  AND company != ''"""
-	shifts = frappe.db.sql(shift_query)
+	cond_shift = ""
+	cond_shift += " and company = %(company)s " if filters.get("company") else ""
+	cond_shift += " and employee_group = %(employee_group)s " if filters.get("employee_group") else ""
+	shift_query = f"""SELECT name as shift 
+					FROM `tabShift Type` 
+					WHERE docstatus < 2
+					{cond_shift} """
+	shifts = frappe.db.sql(shift_query,filters)
 	if not shifts:
 		return columns, data
 
