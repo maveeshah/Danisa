@@ -23,6 +23,7 @@ frappe.query_reports["Daily Attendance Sheet"] = {
       label: __("Employee Group"),
       fieldtype: "Link",
       options: "Employee Group",
+      default: "Daily Rated",
       // get_query: () => {
       //   var company = frappe.query_report.get_filter_value('company');
       //   return {
