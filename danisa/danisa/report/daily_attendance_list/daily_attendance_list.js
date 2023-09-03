@@ -43,7 +43,7 @@ frappe.query_reports["Daily Attendance List"] = {
 
 		{
 			fieldname: "shift",
-			label: __("shift"),
+			label: __("Shift"),
 			fieldtype: "Link",
 			options: "Shift Type",
 			get_query: () => {
