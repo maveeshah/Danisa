@@ -45,7 +45,7 @@ frappe.query_reports["Daily Attendance List"] = {
 			fieldname: "shift",
 			label: __("shift"),
 			fieldtype: "Link",
-			options: "shift",
+			options: "Shift Type",
 			get_query: () => {
 			  var company = frappe.query_report.get_filter_value('company');
 			  var employee_group = frappe.query_report.get_filter_value('employee_group');
