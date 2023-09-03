@@ -48,6 +48,22 @@ frappe.query_reports["Daily Attendance Sheet"] = {
         }
       }
     },
+    {
+      fieldname: "shift",
+      label: __("Shift"),
+      fieldtype: "Link",
+      options: "Shift Type",
+      get_query: () => {
+        var company = frappe.query_report.get_filter_value('company');
+        var employee_group = frappe.query_report.get_filter_value('employee_group');
+        return {
+          filters: {
+            'company': company,
+            'employee_group': employee_group
+          }
+        }
+      }
+    },
 
   ],
 };

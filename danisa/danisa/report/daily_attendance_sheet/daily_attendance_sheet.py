@@ -25,12 +25,12 @@ def get_conditions(filters):
 	return conds
 
 def get_columns():
-	return  [ _("Employee Name") + "::190", _("ID. No.") + "::150",_("Shift") + "::150",_("Place of Work") + "::150",_("Time In") + "::150",_("Time Out") + "::150"]
+	return  [ _("Employee Name") + "::190", _("ID. No.") + "::150",_("Phone No.") + "::150",_("Place of Work") + "::150",_("Time In") + "::150",_("Time Out") + "::150"]
 	
 
 def get_results(filters,conditions):
 	query = """
-		SELECT employee_name, id_number, shift, place_of_work,
+		SELECT employee_name, id_number, phone_no, place_of_work,
 		SUBSTRING(time(in_time), 1, 5) AS in_time, SUBSTRING(time(out_time), 1, 5) AS out_time
 		FROM `tabAttendance`
 		WHERE docstatus = 1 {0}
