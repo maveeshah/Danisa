@@ -22,6 +22,7 @@ def get_conditions(filters):
 	conds += " AND attendance_date = %(attendance_date)s " if filters.get("attendance_date") else ""
 	conds += " AND designation = %(designation)s " if filters.get("designation") else ""
 	conds += " AND employee_group	 = %(employee_group)s " if filters.get("employee_group") else ""
+	conds += " AND shift	 = %(shift)s " if filters.get("shift") else ""
 	return conds
 
 def get_columns():
