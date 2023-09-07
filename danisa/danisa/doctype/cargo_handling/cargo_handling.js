@@ -19,7 +19,7 @@ frappe.ui.form.on('Cargo Handling', {
 	},
 
 	set_shift_and_godown_query: function (frm) {
-		frm.set_query("godownshed_no", function () {
+		frm.set_query("godown_or__shed_no", function () {
 			let company = "";
 			if (frm.doc.company) {
 				company = frm.doc.company;

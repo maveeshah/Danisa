@@ -33,17 +33,18 @@ frappe.query_reports["Cargo Handling Report"] = {
 				var company = frappe.query_report.get_filter_value('company');
 				return {
 					filters: {
-						'company': company
+						'company': company,
+						'employee_group': "Peace Rate"
 					}
 				}
 			}
     },
-    {
-      fieldname: "operation",
-      label: __("Operation"),
-      fieldtype: "Select",
-      options: ["Loading", "Offloading"],
-    },
+    // {
+    //   fieldname: "operation",
+    //   label: __("Operation"),
+    //   fieldtype: "Select",
+    //   options: ["Loading", "Offloading"],
+    // },
     {
       fieldname: "godown",
       label: __("Godown"),
