@@ -26,29 +26,41 @@ frappe.query_reports["Cargo Handling Weekly Summary"] = {
       reqd: 1,
     },
     {
-      fieldname: "shift",
-      label: __("Shift"),
+      fieldname: "designation",
+      label: __("Section/Group"),
       fieldtype: "Link",
-      options: "Shift Type",
+      options: "Designation",
 			get_query: () => {
 				var company = frappe.query_report.get_filter_value('company');
+				var employee_group = frappe.query_report.get_filter_value('employee_group');
 				return {
 					filters: {
+						'employee_group': employee_group,
 						'company': company
 					}
 				}
 			}
     },
     {
+      fieldname: "shift",
+      label: __("Shift"),
+      fieldtype: "Link",
+      options: "Shift Type",
+      get_query: () => {
+        var company = frappe.query_report.get_filter_value('company');
+        return {
+          filters: {
+            'company': company,
+            'employee_group': "Peace Rate"
+          }
+        }
+      }
+    },
+    {
       fieldname: "operation",
       label: __("Operation"),
       fieldtype: "Select",
       options: ["Loading", "Offloading"],
-    },
-    {
-      fieldname: "client",
-      label: __("Client"),
-      fieldtype: "Data",
     },
   ],
 };
