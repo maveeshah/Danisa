@@ -68,6 +68,19 @@ frappe.ui.form.on('Cargo Handling', {
 				},
 			};
 		});
+
+		frm.set_query("commodity", "trucks", function (doc, cdt, cdn) {
+			let company = "";
+			if (frm.doc.company) {
+				company = frm.doc.company;
+			}
+			return {
+				filters: {
+					company: company,
+				}
+			};
+
+		});
 	},
 });
 
