@@ -32,10 +32,9 @@ frappe.query_reports["Cargo Handling Weekly Summary"] = {
       options: "Designation",
 			get_query: () => {
 				var company = frappe.query_report.get_filter_value('company');
-				var employee_group = frappe.query_report.get_filter_value('employee_group');
 				return {
 					filters: {
-						'employee_group': employee_group,
+            'employee_group': "Peace Rate",
 						'company': company
 					}
 				}
