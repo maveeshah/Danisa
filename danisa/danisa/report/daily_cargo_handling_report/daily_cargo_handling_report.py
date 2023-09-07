@@ -25,7 +25,7 @@ def get_conditions(filters):
 
 def get_data(conditions,filters):
 	query = f"""SELECT truck_no, delivery_no, operation, no_of_bagsbales,
-				commodity, (SELECT godown_or__shed_no FROM `tabCargo Handling` WHERE name = `tabOperations`.parent) client
+				commodity, (SELECT godown_or__shed_no FROM `tabCargo Handling` WHERE name = `tabOperations`.parent) as godown, client
 				FROM `tabOperations`
 				WHERE parent in (
 					SELECT name 
@@ -41,6 +41,8 @@ def get_data(conditions,filters):
 def get_columns():
 	return [ _("Truck No.") + "::190",
 	 			_("Delivery. No.") + "::150",
+	 			_("Operation") + "::150",
 	     _("No. of Bags/Bales") + "::115",
 		 _("Commodity") + "::150",
+		 _("Godown") + "::150",
 		_(" Client") + "::150",]
