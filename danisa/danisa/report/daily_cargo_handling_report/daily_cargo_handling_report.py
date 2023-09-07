@@ -20,6 +20,7 @@ def get_conditions(filters):
 	conds += " AND company = %(company)s " if filters.get("company") else ""
 	conds += " AND date = %(date)s " if filters.get("date") else ""
 	conds += " AND shift = %(shift)s " if filters.get("shift") else ""
+	conds += " AND designation = %(designation)s " if filters.get("designation") else ""
 	conds += "AND commodity_type = %(commodity_type)s " if filters.get("commodity_type") else ""
 	return conds
 

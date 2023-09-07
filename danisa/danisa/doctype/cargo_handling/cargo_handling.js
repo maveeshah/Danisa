@@ -53,6 +53,7 @@ frappe.ui.form.on('Cargo Handling', {
 			return {
 				filters: {
 					company: company,
+					employee_group: "Peace Rate",
 				},
 			};
 		});

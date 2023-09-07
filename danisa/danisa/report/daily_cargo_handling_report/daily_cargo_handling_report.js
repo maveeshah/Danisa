@@ -19,6 +19,21 @@ frappe.query_reports["Daily Cargo Handling Report"] = {
 			reqd: 1,
 		},
 		{
+			fieldname: "designation",
+			label: __("Section/Group"),
+			fieldtype: "Link",
+			options: "Designation",
+			get_query: () => {
+				var company = frappe.query_report.get_filter_value('company');
+				return {
+					filters: {
+						'employee_group': "Peace Rate",
+						'company': company
+					}
+				}
+			}
+		},
+		{
 			fieldname: "commodity_type",
 			label: __("Commodity Type"),
 			fieldtype: "Link",
