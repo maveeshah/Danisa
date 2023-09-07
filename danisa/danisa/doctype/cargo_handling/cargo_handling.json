@@ -8,11 +8,11 @@
  "engine": "InnoDB",
  "field_order": [
   "company",
-  "date",
   "shift",
+  "designation",
   "column_break_4",
-  "operation",
-  "godownshed_no",
+  "date",
+  "godown_or__shed_no",
   "commodity_type",
   "section_break_9",
   "trucks",
@@ -28,6 +28,7 @@
    "reqd": 1
   },
   {
+   "default": "Today",
    "fieldname": "date",
    "fieldtype": "Date",
    "in_list_view": 1,
@@ -45,20 +46,6 @@
   {
    "fieldname": "column_break_4",
    "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "operation",
-   "fieldtype": "Select",
-   "in_filter": 1,
-   "in_list_view": 1,
-   "label": "Operation",
-   "options": "\nLoading\nOffloading",
-   "reqd": 1
-  },
-  {
-   "fieldname": "godownshed_no",
-   "fieldtype": "Data",
-   "label": "Godown/Shed No."
   },
   {
    "fieldname": "commodity_type",
@@ -85,11 +72,25 @@
    "options": "Cargo Handling",
    "print_hide": 1,
    "read_only": 1
+  },
+  {
+   "fieldname": "godown_or__shed_no",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Godown/Shed No.",
+   "options": "Godown or Shed No"
+  },
+  {
+   "fieldname": "designation",
+   "fieldtype": "Link",
+   "label": "Section/Group",
+   "options": "Designation",
+   "reqd": 1
   }
  ],
  "is_submittable": 1,
  "links": [],
- "modified": "2023-07-27 23:59:35.904349",
+ "modified": "2023-09-07 04:16:34.622968",
  "modified_by": "Administrator",
  "module": "Danisa",
  "name": "Cargo Handling",
