@@ -56,6 +56,17 @@ frappe.ui.form.on('Cargo Handling', {
 				},
 			};
 		});
+		frm.set_query("commodity_type", function () {
+			let company = "";
+			if (frm.doc.company) {
+				company = frm.doc.company;
+			}
+			return {
+				filters: {
+					company: company,
+				},
+			};
+		});
 	},
 });
 
