@@ -31,7 +31,7 @@ def get_conditions(filters):
 	conds += " AND date between %(from_date)s and %(to_date)s " if filters.get("from_date") and filters.get("to_date") else ""
 	conds += " AND shift = %(shift)s " if filters.get("shift") else ""
 	conds += " AND operation = %(operation)s " if filters.get("operation") else ""
-	conds += " AND godown = %(godown)s " if filters.get("godown") else ""
+	conds += " AND designation = %(designation)s " if filters.get("designation") else ""
 	
 	return conds
 
