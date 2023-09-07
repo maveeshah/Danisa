@@ -12,8 +12,15 @@ frappe.query_reports["Cargo Handling Report"] = {
       reqd: 1,
     },
     {
-      fieldname: "date",
-      label: __("Date"),
+      fieldname: "from_date",
+      label: __("From Date"),
+      fieldtype: "Date",
+      reqd: 1,
+      default: frappe.datetime.add_days(frappe.datetime.nowdate(), -6),
+    },
+    {
+      fieldname: "to_date",
+      label: __("To Date"),
       fieldtype: "Date",
       default: frappe.datetime.nowdate(),
       reqd: 1,
@@ -29,26 +36,15 @@ frappe.query_reports["Cargo Handling Report"] = {
       label: __("Shift"),
       fieldtype: "Link",
       options: "Shift Type",
-			get_query: () => {
-				var company = frappe.query_report.get_filter_value('company');
-				return {
-					filters: {
-						'company': company,
-						'employee_group': "Peace Rate"
-					}
-				}
-			}
-    },
-    // {
-    //   fieldname: "operation",
-    //   label: __("Operation"),
-    //   fieldtype: "Select",
-    //   options: ["Loading", "Offloading"],
-    // },
-    {
-      fieldname: "godown",
-      label: __("Godown"),
-      fieldtype: "Data",
+      get_query: () => {
+        var company = frappe.query_report.get_filter_value('company');
+        return {
+          filters: {
+            'company': company,
+            'employee_group': "Peace Rate"
+          }
+        }
+      }
     },
   ],
 };

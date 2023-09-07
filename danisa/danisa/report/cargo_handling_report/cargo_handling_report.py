@@ -18,10 +18,8 @@ def execute(filters=None):
 def get_conditions(filters):
 	conds = ""
 	conds += " AND company = %(company)s " if filters.get("company") else ""
-	conds += " AND date = %(date)s " if filters.get("date") else ""
+	conds += " AND date between %(from_date)s and %(to_date)s " if filters.get("from_date") and filters.get("to_date") else ""
 	conds += " AND shift = %(shift)s " if filters.get("shift") else ""
-	# conds += " AND operation = %(operation)s " if filters.get("operation") else ""
-	# conds += " AND godown = %(godown)s " if filters.get("godown") else ""
 	conds += "AND commodity_type = %(commodity_type)s " if filters.get("commodity_type") else ""
 	return conds
 
@@ -43,6 +41,8 @@ def get_data(conditions,filters):
 def get_columns():
 	return [ _("Truck No.") + "::190",
 	 			_("Delivery. No.") + "::150",
+	 			_("Operation") + "::150",
 	     _("No. of Bags/Bales") + "::115",
 		 _("Commodity") + "::150",
+		 _("Godown/Shed") + "::150",
 		_(" Client") + "::150",]

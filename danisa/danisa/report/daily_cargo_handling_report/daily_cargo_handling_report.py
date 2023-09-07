@@ -44,5 +44,5 @@ def get_columns():
 	 			_("Operation") + "::150",
 	     _("No. of Bags/Bales") + "::115",
 		 _("Commodity") + "::150",
-		 _("Godown") + "::150",
+		 _("Godown/Shed") + "::150",
 		_(" Client") + "::150",]
