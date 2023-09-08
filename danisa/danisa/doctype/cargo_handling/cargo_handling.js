@@ -17,6 +17,12 @@ frappe.ui.form.on('Cargo Handling', {
 			frm.trigger("set_shift_and_godown_query");
 		}
 	},
+	validate: function (frm) {
+		frm.set_value('total_no_of_bags', 0);
+		let total_bags = 0;
+		frm.doc.trucks.forEach(function (d) { total_bags += parseInt(d.no_of_bagsbales); });
+		frm.set_value('total_no_of_bags', total_bags);
+	},
 
 	set_shift_and_godown_query: function (frm) {
 		frm.set_query("godown_or__shed_no", function () {
@@ -85,6 +91,7 @@ frappe.ui.form.on('Cargo Handling', {
 });
 
 frappe.ui.form.on("Operations", "no_of_bagsbales", function (frm, cdt, cdn) {
+	frm.set_value('total_no_of_bags', 0);
 	let total_bags = 0;
 	frm.doc.trucks.forEach(function (d) { total_bags += parseInt(d.no_of_bagsbales); });
 	frm.set_value('total_no_of_bags', total_bags);

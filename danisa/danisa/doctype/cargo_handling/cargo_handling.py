@@ -5,4 +5,9 @@
 from frappe.model.document import Document
 
 class CargoHandling(Document):
-	pass
+	def validate(self):
+		calc_total = 0
+		if self.trucks:
+			for row in self.trucks:
+				calc_total += int(row.no_of_bagsbales)
+			self.total_no_of_bags = calc_total
