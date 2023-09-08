@@ -67,7 +67,7 @@ frappe.query_reports["Invoicing Summary"] = {
         return {
           filters: {
             company: company,
-            // employee_group: employee_group,
+            employee_group: employee_group,
           },
         };
       },
