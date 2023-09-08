@@ -19,6 +19,7 @@
   "section_break_pi5ic",
   "total_no_of_bags",
   "column_break_nyo8m",
+  "column_break_8otxw",
   "amended_from"
  ],
  "fields": [
@@ -103,11 +104,15 @@
   {
    "fieldname": "column_break_nyo8m",
    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_8otxw",
+   "fieldtype": "Column Break"
   }
  ],
  "is_submittable": 1,
  "links": [],
- "modified": "2023-09-08 22:19:47.045387",
+ "modified": "2023-09-08 22:33:14.231576",
  "modified_by": "Administrator",
  "module": "Danisa",
  "name": "Cargo Handling",
