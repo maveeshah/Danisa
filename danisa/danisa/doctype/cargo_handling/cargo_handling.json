@@ -16,7 +16,9 @@
   "commodity_type",
   "section_break_9",
   "trucks",
+  "section_break_pi5ic",
   "total_no_of_bags",
+  "column_break_nyo8m",
   "amended_from"
  ],
  "fields": [
@@ -93,11 +95,19 @@
    "fieldtype": "Float",
    "label": "Total No Of Bags",
    "read_only": 1
+  },
+  {
+   "fieldname": "section_break_pi5ic",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_nyo8m",
+   "fieldtype": "Column Break"
   }
  ],
  "is_submittable": 1,
  "links": [],
- "modified": "2023-09-07 18:50:08.600647",
+ "modified": "2023-09-08 22:19:47.045387",
  "modified_by": "Administrator",
  "module": "Danisa",
  "name": "Cargo Handling",
