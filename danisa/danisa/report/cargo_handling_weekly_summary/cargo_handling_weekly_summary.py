@@ -88,7 +88,7 @@ def get_data(conditions,filters,date_list):
 # 	return columns	
 def get_columns(date_list):
     columns = [
-        {"fieldname": "commodity_type", "label": _("Commodity Type"), "fieldtype": "Link", "options": "Commodity Type", "width": 150},
+        {"fieldname": "commodity_type", "label": _("Commodity Type"), "fieldtype": "Link", "options": "Commodity Type", "width": 215},
     ]
     
     for day in date_list:
