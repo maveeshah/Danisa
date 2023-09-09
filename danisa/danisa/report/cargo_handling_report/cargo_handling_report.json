@@ -9,7 +9,7 @@
  "filters": [],
  "idx": 0,
  "is_standard": "Yes",
- "modified": "2023-07-25 08:09:46.937452",
+ "modified": "2023-09-09 15:14:38.334604",
  "modified_by": "Administrator",
  "module": "Danisa",
  "name": "Cargo Handling Report",
@@ -21,6 +21,9 @@
  "roles": [
   {
    "role": "System Manager"
+  },
+  {
+   "role": "Clerk"
   }
  ]
 }

@@ -9,7 +9,7 @@
  "filters": [],
  "idx": 0,
  "is_standard": "Yes",
- "modified": "2023-07-26 22:53:22.640448",
+ "modified": "2023-09-09 15:20:25.585538",
  "modified_by": "Administrator",
  "module": "Danisa",
  "name": "Labour Requisition Report",
@@ -21,6 +21,9 @@
  "roles": [
   {
    "role": "System Manager"
+  },
+  {
+   "role": "Clerk"
   }
  ]
 }

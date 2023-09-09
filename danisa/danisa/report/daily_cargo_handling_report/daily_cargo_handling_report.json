@@ -9,7 +9,7 @@
  "filters": [],
  "idx": 0,
  "is_standard": "Yes",
- "modified": "2023-09-07 19:56:43.829435",
+ "modified": "2023-09-09 15:13:37.581802",
  "modified_by": "Administrator",
  "module": "Danisa",
  "name": "Daily Cargo Handling Report",
@@ -21,6 +21,9 @@
  "roles": [
   {
    "role": "System Manager"
+  },
+  {
+   "role": "Clerk"
   }
  ]
 }
