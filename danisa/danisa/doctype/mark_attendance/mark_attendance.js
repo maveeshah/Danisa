@@ -78,7 +78,9 @@ frappe.ui.form.on("Mark Attendance", {
         if (frm.doc.employee_group == "Monthly") {
           emp_group = "Daily Rated";
         }
-        emp_group = frm.doc.employee_group;
+        else {
+          emp_group = frm.doc.employee_group;
+        }
       }
       return {
         filters: {
@@ -98,7 +100,9 @@ frappe.ui.form.on("Mark Attendance", {
         if (frm.doc.employee_group == "Monthly") {
           emp_group = "Daily Rated";
         }
-        emp_group = frm.doc.employee_group;
+        else {
+          emp_group = frm.doc.employee_group;
+        }
       }
       return {
         filters: {
