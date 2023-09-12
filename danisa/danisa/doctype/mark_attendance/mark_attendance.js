@@ -8,7 +8,7 @@ frappe.ui.form.on("Mark Attendance", {
 
   company: function (frm) {
     frm.trigger("set_shift_and_designation_query");
-    me.frm.set_query("name_series", "add_employee", function(doc, cdt, cdn) {
+    me.frm.set_query("name_series", "add_employee", function (doc, cdt, cdn) {
       let company = "";
       if (frm.doc.company) {
         company = frm.doc.company;
@@ -18,7 +18,7 @@ frappe.ui.form.on("Mark Attendance", {
           company: company,
         },
       };
-		});
+    });
   },
 
   attendance_date(frm) {
@@ -75,6 +75,9 @@ frappe.ui.form.on("Mark Attendance", {
         company = frm.doc.company;
       }
       if (frm.doc.employee_group) {
+        if (frm.doc.employee_group == "Monthly") {
+          emp_group = "Daily Rated";
+        }
         emp_group = frm.doc.employee_group;
       }
       return {
@@ -92,6 +95,9 @@ frappe.ui.form.on("Mark Attendance", {
         company = frm.doc.company;
       }
       if (frm.doc.employee_group) {
+        if (frm.doc.employee_group == "Monthly") {
+          emp_group = "Daily Rated";
+        }
         emp_group = frm.doc.employee_group;
       }
       return {
